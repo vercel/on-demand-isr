@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fleerob%2Fon-demand-isr&env=GITHUB_WEBHOOK_SECRET,GITHUB_APP_ID,GITHUB_APP_PK_PEM&envDescription=API%20keys%20needed%20to%20connect%20to%20the%20GitHub%20Application.&envLink=https%3A%2F%2Fgithub.com%2Fleerob%2Fon-demand-isr&demo-title=On-Demand%20ISR&demo-description=Demo%20of%20on-demand%20ISR%20in%20Next.js%2012.1%20using%20GitHub%20Issues.&demo-url=https%3A%2F%2Fon-demand-isr.vercel.app)
 
-## Getting Started
+# On-Demand Incremental Static Regeneration
 
-First, run the development server:
+Demo of on-demand ISR in [Next.js 12.1](https://nextjs.org/blog/next-12-1) using GitHub Issues. When a new issue is created, a webhook from a GitHub App _pushes_ new changes to the deployed application to regenerate the static page.
+
+## Setup
+
+1. Create a new [GitHub App](https://github.com/settings/apps/new)
+   1. Provide the URL of your deployed application for Homepage URL
+   1. Ensure Webhook "Active" is checked
+   1. Add `<your-site>/api/webhook` as the Webhook URL
+   1. Create a Webhook secret and add it to `.env.local` as `GITHUB_WEBHOOK_SECRET`
+   1. Give "Read Only" access to Issues
+   1. Subscribe to "Issues" events
+1. Add the App ID to `.env.local` as `GITHUB_APP_ID`
+1. Generate a private key and add it to `.env.local` as `GITHUB_APP_PK_PEM`
+1. Install the newly created GitHub App for your repo
+1. `https://github.com/settings/apps/<your-app-name>/installations`
+
+## Running Locally
 
 ```bash
-npm run dev
-# or
-yarn dev
+$ npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Read the documentation](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration.md#testing-on-demand-isr-during-development)

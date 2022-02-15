@@ -1,0 +1,152 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.repo_title {
+  margin-bottom: 20px;
+  font-size: 20px;
+
+  a {
+    color: #66e6f4;
+  }
+
+  a:hover {
+    border-bottom: 1px dotted #66e6f4;
+  }
+}
+
+.explanation {
+  color: #ccc;
+  font-size: 14px;
+  border: 1px dashed #666;
+  padding: 10px 20px;
+  margin-bottom: 40px;
+  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  line-height: 1.5;
+  background-color: #161b22;
+
+  p {
+    margin-bottom: 10px;
+
+    a {
+      color: #fff;
+      border-bottom: 1px solid #fff;
+    }
+
+    em {
+      color: #f4e866;
+      font-weight: normal;
+      font-style: normal;
+
+      a {
+        color: #f4e866;
+        border-bottom-color: #f4e866;
+      }
+    }
+  }
+}
+
+.explanation_notes {
+  color: #999;
+  margin-top: 5px;
+  display: block;
+  font-size: 12px;
+}
+
+.issues {
+  border: 1px solid #30363d;
+  width: 100%;
+  color: #c8d1d9;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+.issue {
+  padding: 15px 20px;
+  border-bottom: 1px solid #21262d;
+
+  &:hover {
+    background-color: #151b22;
+  }
+}
+
+.issue_title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+
+  a:hover {
+    color: #66e6f4;
+  }
+}
+
+@mixin icon {
+  fill: currentColor;
+  display: inline-block;
+  overflow: visible;
+  vertical-align: text-bottom;
+}
+
+.github_icon {
+  @include icon;
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+
+  path {
+    color: #eee;
+  }
+}
+
+.issue_icon {
+  @include icon;
+  margin-right: 5px;
+
+  path {
+    color: #66e6f4;
+  }
+}
+
+.issue_desc {
+  padding-left: 25px;
+}
+
+.details {
+  summary {
+    cursor: pointer;
+
+    span {
+      padding-left: 5px;
+    }
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  p {
+    padding: 10px 20px;
+    margin: 0;
+
+    code {
+      background: #222;
+      padding: 3px;
+    }
+
+    em {
+      color: #eee;
+      font-style: oblique;
+    }
+  }
+
+  &[open] {
+    summary {
+      font-weight: bold;
+      color: #fff;
+    }
+
+    background: #333;
+  }
+}
