@@ -109,7 +109,7 @@ export default function Home({ issues, stargazers_count, forks_count }: any) {
               target="_blank"
               rel="noreferrer"
             >
-              isr-issues-test
+              on-demand-isr
             </a>
             ` repo change (get created, reacted to, deleted, etc), GitHub fires
             off a webhook and the impacted pages get re-rendered and pushed to
