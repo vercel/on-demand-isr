@@ -7,7 +7,8 @@ TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 export async function getStaticProps() {
-  const d = Date.now();
+  let d = Date.now();
+
   const token = getGitHubJWT();
   const installation = await getInstallation(token);
   const accessToken = await getAccessToken(installation.id, token);
@@ -16,9 +17,15 @@ export async function getStaticProps() {
   console.log(`[Next.js] Running getStaticProps...`);
   console.log(`[Next.js] Fetched issues: ${Date.now() - d}ms`);
 
+  d = Date.now();
+  const { stargazers_count, forks_count } = await getRepoDetails(accessToken);
+  console.log(`[Next.js] Fetched repo details: ${Date.now() - d}ms`);
+
   return {
     props: {
       issues,
+      stargazers_count,
+      forks_count,
     },
     revalidate: 60,
   };
@@ -26,6 +33,10 @@ export async function getStaticProps() {
 
 function getIssues(token: string) {
   return fetchGitHub('/repos/leerob/on-demand-isr/issues', token);
+}
+
+function getRepoDetails(token: string) {
+  return fetchGitHub('/repos/leerob/on-demand-isr', token);
 }
 
 async function getAccessToken(installationId: number, token: string) {
@@ -70,7 +81,7 @@ async function fetchGitHub(path: string, token: string, opts: any = {}) {
   return req.json();
 }
 
-export default function Home({ issues }: any) {
+export default function Home({ issues, stargazers_count, forks_count }: any) {
   return (
     <main className={styles.main}>
       <div className={styles.explanation}>
@@ -148,36 +159,91 @@ export default function Home({ issues }: any) {
         </p>
       </div>
 
-      <div className={styles.repo_title}>
-        <GitHubIcon />{' '}
-        <a href="https://github.com/leerob" target="_blank" rel="noreferrer">
-          leerob
-        </a>{' '}
-        /{' '}
-        <a
-          href="https://github.com/leerob/on-demand-isr"
-          target="_blank"
-          rel="noreferrer"
-        >
-          on-demand-isr
-        </a>
+      <div className={styles.repo}>
+        <div className={styles.repo_title}>
+          <GitHubIcon />{' '}
+          <a href="https://github.com/leerob" target="_blank" rel="noreferrer">
+            leerob
+          </a>{' '}
+          /{' '}
+          <a
+            href="https://github.com/leerob/on-demand-isr"
+            target="_blank"
+            rel="noreferrer"
+          >
+            on-demand-isr
+          </a>
+        </div>
+        <div className={styles.forks_stars}>
+          <a
+            href="https://github.com/leerob/on-demand-isr/fork"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <ForkIcon /> {new Number(forks_count).toLocaleString()}
+          </a>
+          <a
+            href="https://github.com/leerob/on-demand-isr"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <StarIcon /> {new Number(stargazers_count).toLocaleString()}
+          </a>
+        </div>
       </div>
 
       <div className={styles.issues}>
         {issues.map((issue: any) => (
-          <div className={styles.issue} key={issue.id}>
-            <div className={styles.issue_reactions}></div>
-            <div className={styles.issue_title}>
-              <IssueIcon /> <a href="#">{issue.title}</a>
+          <a href="#" className={styles.issue} key={issue.id}>
+            {/* <div className={styles.issue_reactions}></div> */}
+            <IssueIcon />
+            <div>
+              <div className={styles.issue_title}>{issue.title}</div>
+              <div className={styles.issue_desc}>
+                #{issue.number} opened{' '}
+                {timeAgo.format(new Date(issue.created_at))} by{' '}
+                {issue.user.login}
+              </div>
             </div>
-            <div className={styles.issue_desc}>
-              #{issue.number} opened{' '}
-              {timeAgo.format(new Date(issue.created_at))} by {issue.user.login}
-            </div>
-          </div>
+          </a>
         ))}
       </div>
     </main>
+  );
+}
+
+function StarIcon() {
+  return (
+    <svg
+      className={styles.star_icon}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fillRule="evenodd"
+        d="M12.672.668a.75.75 0 00-1.345 0L8.27 6.865l-6.838.994a.75.75 0 00-.416 1.279l4.948 4.823-1.168 6.811a.75.75 0 001.088.791L12 18.347l6.117 3.216a.75.75 0 001.088-.79l-1.168-6.812 4.948-4.823a.75.75 0 00-.416-1.28l-6.838-.993L12.672.668z"
+      />
+    </svg>
+  );
+}
+
+function ForkIcon() {
+  return (
+    <svg
+      className={styles.fork_icon}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fillRule="evenodd"
+        d="M12 21a1.75 1.75 0 110-3.5 1.75 1.75 0 010 3.5zm-3.25-1.75a3.25 3.25 0 106.5 0 3.25 3.25 0 00-6.5 0zm-3-12.75a1.75 1.75 0 110-3.5 1.75 1.75 0 010 3.5zM2.5 4.75a3.25 3.25 0 106.5 0 3.25 3.25 0 00-6.5 0zM18.25 6.5a1.75 1.75 0 110-3.5 1.75 1.75 0 010 3.5zM15 4.75a3.25 3.25 0 106.5 0 3.25 3.25 0 00-6.5 0z"
+      />
+      <path
+        fillRule="evenodd"
+        d="M6.5 7.75v1A2.25 2.25 0 008.75 11h6.5a2.25 2.25 0 002.25-2.25v-1H19v1a3.75 3.75 0 01-3.75 3.75h-6.5A3.75 3.75 0 015 8.75v-1h1.5z"
+      />
+      <path fillRule="evenodd" d="M11.25 16.25v-5h1.5v5h-1.5z" />
+    </svg>
   );
 }
 
