@@ -225,7 +225,7 @@ function Emoji({ emoji, count }) {
   return count ? (
     <div className={styles.emoji_square}>
       <span className={styles.emoji}>{emoji}</span>{' '}
-      <strong>{new Number(324).toLocaleString()}</strong>
+      <strong>{new Number(count).toLocaleString()}</strong>
     </div>
   ) : null;
 }
