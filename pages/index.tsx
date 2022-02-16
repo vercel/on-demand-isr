@@ -195,7 +195,6 @@ export default function Home({ issues, stargazers_count, forks_count }: any) {
       <div className={styles.issues}>
         {issues.map((issue: any) => (
           <a href="#" className={styles.issue} key={issue.id}>
-            {/* <div className={styles.issue_reactions}></div> */}
             <IssueIcon />
             <div>
               <div className={styles.issue_title}>{issue.title}</div>
@@ -204,12 +203,31 @@ export default function Home({ issues, stargazers_count, forks_count }: any) {
                 {timeAgo.format(new Date(issue.created_at))} by{' '}
                 {issue.user.login}
               </div>
+              <div className={styles.issue_reactions}>
+                <Emoji emoji="👍" count={issue.reactions['+1']} />
+                <Emoji emoji="👎" count={issue.reactions['-1']} />
+                <Emoji emoji="😄" count={issue.reactions.laugh} />
+                <Emoji emoji="🎉" count={issue.reactions.hooray} />
+                <Emoji emoji="😕" count={issue.reactions.confused} />
+                <Emoji emoji="🧡" count={issue.reactions.heart} />
+                <Emoji emoji="🚀" count={issue.reactions.rocket} />
+                <Emoji emoji="👀" count={issue.reactions.eyes} />
+              </div>
             </div>
           </a>
         ))}
       </div>
     </main>
   );
+}
+
+function Emoji({ emoji, count }) {
+  return count ? (
+    <div className={styles.emoji_square}>
+      <span className={styles.emoji}>{emoji}</span>{' '}
+      <strong>{new Number(324).toLocaleString()}</strong>
+    </div>
+  ) : null;
 }
 
 function StarIcon() {

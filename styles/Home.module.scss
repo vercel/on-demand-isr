@@ -199,3 +199,23 @@
     background: #333;
   }
 }
+
+.issue_reactions {
+  display: flex;
+  flex-direction: column;
+
+  .emoji {
+    font-size: 12px;
+  }
+
+  .emoji_square {
+    margin-top: 16px;
+    margin-right: 12px;
+  }
+}
+
+@media (min-width: 600px) {
+  .issue_reactions {
+    flex-direction: row;
+  }
+}
