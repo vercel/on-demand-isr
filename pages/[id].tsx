@@ -1,18 +1,19 @@
-import jwt from "jsonwebtoken";
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en.json";
-import styles from "../styles/Home.module.scss";
-import { useRouter } from "next/router";
-import Layout from "../components/Layout";
-import Image from "next/image";
-import { StarIcon, ForkIcon, GitHubIcon, IssueIcon } from "../components/icons";
+import jwt from 'jsonwebtoken';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json';
+import styles from '../styles/Home.module.scss';
+import { useRouter } from 'next/router';
+import Layout from '../components/Layout';
+import Image from 'next/image';
+import { marked } from 'marked';
+import hljs from 'highlight.js';
 
 TimeAgo.addDefaultLocale(en);
-const timeAgo = new TimeAgo("en-US");
+const timeAgo = new TimeAgo('en-US');
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { id: "1" } }, { params: { id: "2" } }],
+    paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
     fallback: true,
   };
 }
@@ -58,14 +59,14 @@ function getIssueComments(token: string, issue: string) {
 }
 
 function getRepoDetails(token: string) {
-  return fetchGitHub("/repos/leerob/on-demand-isr", token);
+  return fetchGitHub('/repos/leerob/on-demand-isr', token);
 }
 
 async function getAccessToken(installationId: number, token: string) {
   const data = await fetchGitHub(
     `/app/installations/${installationId}/access_tokens`,
     token,
-    { method: "POST" }
+    { method: 'POST' }
   );
   return data.token;
 }
@@ -79,14 +80,14 @@ function getGitHubJWT() {
     },
     process.env.GITHUB_APP_PK_PEM,
     {
-      algorithm: "RS256",
+      algorithm: 'RS256',
     }
   );
 }
 
 async function getInstallation(token: string) {
-  const installations = await fetchGitHub("/app/installations", token);
-  return installations.find((i: any) => i.account.login === "leerob");
+  const installations = await fetchGitHub('/app/installations', token);
+  return installations.find((i: any) => i.account.login === 'leerob');
 }
 
 async function fetchGitHub(path: string, token: string, opts: any = {}) {
@@ -95,12 +96,26 @@ async function fetchGitHub(path: string, token: string, opts: any = {}) {
     headers: {
       ...opts.headers,
       Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-      Accept: "application/vnd.github.v3+json",
+      'Content-Type': 'application/json',
+      Accept: 'application/vnd.github.v3+json',
     },
   });
 
   return req.json();
+}
+
+function markdownToHtml(markdown) {
+  if (!markdown) {
+    return null;
+  }
+
+  marked.setOptions({
+    highlight: function (code, language) {
+      return hljs.highlight(code, { language }).value;
+    },
+  });
+
+  return marked(markdown);
 }
 
 export default function Issue({ issue, comments }: any) {
@@ -122,6 +137,7 @@ export default function Issue({ issue, comments }: any) {
       </Layout>
     );
   }
+
   return (
     <Layout issue_count={issue.comments}>
       <div className={styles.comments}>
@@ -142,12 +158,17 @@ export default function Issue({ issue, comments }: any) {
           </div>
           <div className={styles.comment_div}>
             <div className={styles.comment_timestamp}>
-              <b>{issue.user.login}</b> commented{" "}
+              <b>{issue.user.login}</b> commented{' '}
               {timeAgo.format(new Date(issue.created_at))}
             </div>
-            <div className={styles.comment_body}>
-              {issue.body || <i>No description provided.</i>}
-            </div>
+            <div
+              dangerouslySetInnerHTML={{
+                __html:
+                  markdownToHtml(issue.body) ||
+                  '<i>No description provided.</i>',
+              }}
+              className={styles.comment_body}
+            />
           </div>
         </a>
         {comments.map((comment: any) => (
@@ -168,10 +189,15 @@ export default function Issue({ issue, comments }: any) {
             </div>
             <div className={styles.comment_div}>
               <div className={styles.comment_timestamp}>
-                <b>{comment.user.login}</b> commented{" "}
+                <b>{comment.user.login}</b> commented{' '}
                 {timeAgo.format(new Date(comment.created_at))}
               </div>
-              <div className={styles.comment_body}>{comment.body}</div>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: markdownToHtml(issue.body),
+                }}
+                className={styles.comment_body}
+              />
             </div>
           </a>
         ))}
