@@ -128,6 +128,7 @@ export default function Issue({ issue, comments }: any) {
         <a
           href={issue.html_url}
           target="_blank"
+          rel="noreferrer"
           className={styles.comment}
           key={issue.id}
         >
@@ -153,6 +154,7 @@ export default function Issue({ issue, comments }: any) {
           <a
             href={comment.html_url}
             target="_blank"
+            rel="noreferrer"
             className={styles.comment}
             key={comment.id}
           >
