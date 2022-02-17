@@ -26,4 +26,4 @@ $ npm run dev
 
 ## Learn More
 
-- [Read the documentation](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration.md#testing-on-demand-isr-during-development)
+- [Read the documentation](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration)
