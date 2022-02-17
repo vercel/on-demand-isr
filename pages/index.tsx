@@ -4,7 +4,7 @@ import en from 'javascript-time-ago/locale/en.json';
 import styles from '../styles/Home.module.scss';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import { IssueIcon } from '../components/icons';
+import { IssueOpenIcon, IssueClosedIcon } from '../components/icons';
 
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
@@ -95,7 +95,7 @@ export default function Home({ issues, stargazers_count, forks_count }: any) {
         {issues.map((issue: any) => (
           <Link key={issue.number} href={`/${issue.number}`}>
             <a className={styles.issue} key={issue.id}>
-              <IssueIcon />
+              {issue.state === 'open' ? <IssueOpenIcon /> : <IssueClosedIcon />}
               <div>
                 <div className={styles.issue_title}>{issue.title}</div>
                 <div className={styles.issue_desc}>
