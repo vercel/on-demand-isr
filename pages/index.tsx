@@ -30,7 +30,6 @@ export async function getStaticProps() {
       stargazers_count,
       forks_count,
     },
-    revalidate: 60,
   };
 }
 
