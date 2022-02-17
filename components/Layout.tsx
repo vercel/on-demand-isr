@@ -90,8 +90,7 @@ export default function Layout({
             >
               creating a new issue
             </a>{' '}
-            or reacting to one, and refresh this page to see the regenerated
-            one!_
+            or commenting, and refresh this page to see the regenerated one!_
           </em>{' '}
           <br />
           <span className={styles.explanation_notes}>
