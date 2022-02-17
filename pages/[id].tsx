@@ -27,8 +27,6 @@ export async function getStaticProps({ params }) {
   const issue = await getIssue(accessToken, params.id);
   const comments = await getIssueComments(accessToken, params.id);
 
-  console.log(issue);
-
   console.log(`[Next.js] Running getStaticProps...`);
   console.log(`[Next.js] Fetched issues: ${Date.now() - d}ms`);
 
