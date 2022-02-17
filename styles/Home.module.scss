@@ -51,7 +51,7 @@
   border: 1px dashed #666;
   padding: 10px 20px;
   margin-bottom: 40px;
-  font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
   line-height: 1.5;
   background-color: #161b22;
 
@@ -162,6 +162,18 @@
   }
 }
 
+.comment_icon {
+  @include icon;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  width: 13px;
+  height: 13px;
+
+  path {
+    color: #eee;
+  }
+}
+
 .details {
   summary {
     cursor: pointer;
@@ -200,22 +212,55 @@
   }
 }
 
-.issue_reactions {
+.image {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #eee;
+  margin-right: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.comments {
+  width: 100%;
+  color: #c8d1d9;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+.comment {
+  padding: 15px 0px;
   display: flex;
-  flex-direction: column;
+}
 
-  .emoji {
-    font-size: 12px;
-  }
+.comment_div {
+  border: 1px solid #21262d;
+  border-radius: 5px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 
-  .emoji_square {
-    margin-top: 16px;
-    margin-right: 12px;
+  &:hover {
+    background-color: #151b22;
   }
 }
 
-@media (min-width: 600px) {
-  .issue_reactions {
-    flex-direction: row;
-  }
+.comment_timestamp {
+  font-size: 14px;
+  margin-bottom: 10px;
+  background-color: #313f50;
+  width: 100%;
+  padding: 10px 18px;
+  min-height: 2.2rem;
+}
+
+.comment_body {
+  font-size: 15px;
+  margin-bottom: 10px;
+  padding: 10px 18px;
+  min-height: 2.6rem;
+  line-height: 1.5rem;
 }
