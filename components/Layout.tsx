@@ -44,10 +44,10 @@ export default function Layout({
             >
               on-demand-isr
             </a>
-            ` repo change (get created, reacted to, deleted, etc), GitHub fires
-            off a webhook and the impacted pages get re-rendered and pushed to
-            the edge, on demand. The webhook on the Next.js app side executes a
-            new{' '}
+            ` repo change (get created, commented on, deleted, etc), GitHub
+            fires off a webhook and the impacted pages get re-rendered and
+            pushed to the edge, on demand. The webhook on the Next.js app side
+            executes a new{' '}
             <a
               href="https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration.md#on-demand-revalidation-beta"
               target="_blank"
