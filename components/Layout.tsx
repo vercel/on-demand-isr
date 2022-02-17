@@ -7,6 +7,7 @@ import {
 } from '../components/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Head from 'next/head';
 
 export default function Layout({
   children,
@@ -18,6 +19,11 @@ export default function Layout({
   const router = useRouter();
   return (
     <main className={styles.main}>
+      <Head>
+        <title>
+          On-Demand Incremental Static Regeneration with Next.js 12.1
+        </title>
+      </Head>
       <div className={styles.explanation}>
         <p>
           This app demonstrates the new <b>*On-Demand ISR support*</b> in
