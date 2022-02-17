@@ -6,6 +6,7 @@ import {
   CommentIcon,
 } from '../components/icons';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export default function Layout({
   children,
@@ -103,17 +104,17 @@ export default function Layout({
       <div className={styles.repo}>
         <div className={styles.repo_title}>
           <GitHubIcon />{' '}
-          <a href="https://github.com/leerob" target="_blank" rel="noreferrer">
-            leerob
-          </a>{' '}
-          /{' '}
           <a
-            href="https://github.com/leerob/on-demand-isr"
+            href="https://github.com/leerobon-demand-isr"
             target="_blank"
             rel="noreferrer"
           >
-            on-demand-isr
-          </a>
+            leerob
+          </a>{' '}
+          /{' '}
+          <Link href="/">
+            <a>on-demand-isr</a>
+          </Link>
           {router.query.id && (
             <>
               {' '}
