@@ -105,7 +105,7 @@ export default function Layout({
         <div className={styles.repo_title}>
           <GitHubIcon />{' '}
           <a
-            href="https://github.com/leerobon-demand-isr"
+            href="https://github.com/leerob/on-demand-isr"
             target="_blank"
             rel="noreferrer"
           >
