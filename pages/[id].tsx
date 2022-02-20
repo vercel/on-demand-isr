@@ -127,7 +127,7 @@ export default function Issue({ issue, comments }: any) {
         >
           <div className={styles.image}>
             <Image
-              src={issue.user.avatar_url}
+              src={issue.user.avatar_url || '/avatar.png'}
               alt={issue.user.login}
               className={styles.rounded}
               objectFit="cover"
@@ -160,7 +160,7 @@ export default function Issue({ issue, comments }: any) {
           >
             <div className={styles.image}>
               <Image
-                src={comment.user.avatar_url}
+                src={comment.user.avatar_url || '/avatar.png'}
                 alt={comment.user.login}
                 className={styles.rounded}
                 objectFit="cover"
