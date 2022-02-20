@@ -1,18 +1,16 @@
-import jwt from 'jsonwebtoken';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import styles from '../styles/Home.module.scss';
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import { CommentIcon, IssueIcon } from '../components/icons';
+import { fetchGitHub, readAccessToken } from '../lib/github';
 
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 export async function getStaticProps() {
-  const token = getGitHubJWT();
-  const installation = await getInstallation(token);
-  const accessToken = await getAccessToken(installation.id, token);
+  const accessToken = await readAccessToken();
   const [issues, repoDetails] = await Promise.all([
     getIssues(accessToken),
     getRepoDetails(accessToken),
@@ -33,48 +31,6 @@ function getIssues(token: string) {
 
 function getRepoDetails(token: string) {
   return fetchGitHub('/repos/leerob/on-demand-isr', token);
-}
-
-async function getAccessToken(installationId: number, token: string) {
-  const data = await fetchGitHub(
-    `/app/installations/${installationId}/access_tokens`,
-    token,
-    { method: 'POST' }
-  );
-  return data.token;
-}
-
-function getGitHubJWT() {
-  return jwt.sign(
-    {
-      iat: Math.floor(Date.now() / 1000) - 60,
-      iss: process.env.GITHUB_APP_ID,
-      exp: Math.floor(Date.now() / 1000) + 60 * 10, // 10 minutes is the max
-    },
-    process.env.GITHUB_APP_PK_PEM,
-    {
-      algorithm: 'RS256',
-    }
-  );
-}
-
-async function getInstallation(token: string) {
-  const installations = await fetchGitHub('/app/installations', token);
-  return installations.find((i: any) => i.account.login === 'leerob');
-}
-
-async function fetchGitHub(path: string, token: string, opts: any = {}) {
-  const req = await fetch(`https://api.github.com${path}`, {
-    ...opts,
-    headers: {
-      ...opts.headers,
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-      Accept: 'application/vnd.github.v3+json',
-    },
-  });
-
-  return req.json();
 }
 
 export default function Home({ issues, stargazers_count, forks_count }: any) {
