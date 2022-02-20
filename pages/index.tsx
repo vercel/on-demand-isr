@@ -4,7 +4,7 @@ import en from 'javascript-time-ago/locale/en.json';
 import styles from '../styles/Home.module.scss';
 import Link from 'next/link';
 import Layout from '../components/Layout';
-import { IssueIcon } from '../components/icons';
+import { CommentIcon, IssueIcon } from '../components/icons';
 
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
@@ -103,6 +103,11 @@ export default function Home({ issues, stargazers_count, forks_count }: any) {
                   {issue.user.login}
                 </div>
               </div>
+              {issue.comments > 0 && (
+                <div className={styles.comment_count}>
+                  <CommentIcon /> {new Number(issue.comments).toLocaleString()}
+                </div>
+              )}
             </a>
           </Link>
         ))}

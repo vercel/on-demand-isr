@@ -1,10 +1,5 @@
 import styles from '../styles/Home.module.scss';
-import {
-  StarIcon,
-  ForkIcon,
-  GitHubIcon,
-  CommentIcon,
-} from '../components/icons';
+import { StarIcon, ForkIcon, GitHubIcon, LinkIcon } from '../components/icons';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
@@ -152,13 +147,13 @@ export default function Layout({
             </a>
           </div>
         ) : (
-          <div className={styles.forks_stars}>
+          <div className={styles.issue_comments}>
             <a
-              href="https://github.com/leerob/on-demand-isr"
+              href={`https://github.com/leerob/on-demand-isr/${router.query.id}`}
               target="_blank"
               rel="noreferrer"
             >
-              <CommentIcon /> {new Number(issue_count).toLocaleString()}
+              <LinkIcon /> {'Open in GitHub'}
             </a>
           </div>
         )}

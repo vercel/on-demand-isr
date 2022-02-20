@@ -35,12 +35,31 @@
   }
 }
 
+.issue_comments {
+  color: #888;
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+
+  a:hover {
+    color: #66e6f4;
+
+    path {
+      color: #66e6f4;
+    }
+  }
+}
+
 @media (min-width: 500px) {
   .repo {
     flex-direction: row;
   }
 
   .forks_stars {
+    margin-top: 0;
+  }
+
+  .issue_comments {
     margin-top: 0;
   }
 }
@@ -164,14 +183,20 @@
 
 .comment_icon {
   @include icon;
-  margin-right: 10px;
-  margin-bottom: 5px;
-  width: 12px;
-  height: 12px;
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
 
   path {
-    color: #eee;
+    color: #888;
   }
+}
+
+.comment_count {
+  color: #888;
+  display: flex;
+  align-items: center;
+  margin-left: auto;
 }
 
 .details {
@@ -212,16 +237,14 @@
   }
 }
 
-.image {
-  width: 2rem;
-  height: 2rem;
+.rounded {
   border-radius: 50%;
-  background-color: #eee;
+}
+
+.image {
   margin-right: 10px;
   margin-top: 4px;
   margin-bottom: auto;
-  overflow: hidden;
-  position: relative;
 }
 
 .comments {

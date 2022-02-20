@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import styles from '../styles/Home.module.scss';
-// import { useRouter } from "next/router";
 import Layout from '../components/Layout';
 import Image from 'next/image';
 import { marked } from 'marked';
@@ -116,25 +115,6 @@ function markdownToHtml(markdown) {
 }
 
 export default function Issue({ issue, comments }: any) {
-  // const router = useRouter();
-  // if (router.isFallback) {
-  //   return (
-  //     <Layout>
-  //       <div className={styles.comments}>
-  //         {[0, 1, 2].map((idx: number) => (
-  //           <div className={styles.comment} key={idx}>
-  //             <div className={styles.image} />
-  //             <div className={styles.comment_div}>
-  //               <div className={styles.comment_timestamp} />
-  //               <div className={styles.comment_body} />
-  //             </div>
-  //           </div>
-  //         ))}
-  //       </div>
-  //     </Layout>
-  //   );
-  // }
-
   return (
     <Layout issue_count={issue.comments}>
       <div className={styles.comments}>
@@ -149,8 +129,10 @@ export default function Issue({ issue, comments }: any) {
             <Image
               src={issue.user.avatar_url}
               alt={issue.user.login}
-              layout="fill"
+              className={styles.rounded}
               objectFit="cover"
+              height={32}
+              width={32}
             />
           </div>
           <div className={styles.comment_div}>
@@ -180,8 +162,10 @@ export default function Issue({ issue, comments }: any) {
               <Image
                 src={comment.user.avatar_url}
                 alt={comment.user.login}
-                layout="fill"
+                className={styles.rounded}
                 objectFit="cover"
+                height={32}
+                width={32}
               />
             </div>
             <div className={styles.comment_div}>
