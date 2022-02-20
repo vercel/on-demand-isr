@@ -10,25 +10,19 @@ TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 export async function getStaticProps() {
-  let d = Date.now();
-
   const token = getGitHubJWT();
   const installation = await getInstallation(token);
   const accessToken = await getAccessToken(installation.id, token);
-  const issues = await getIssues(accessToken);
-
-  console.log(`[Next.js] Running getStaticProps...`);
-  console.log(`[Next.js] Fetched issues: ${Date.now() - d}ms`);
-
-  d = Date.now();
-  const { stargazers_count, forks_count } = await getRepoDetails(accessToken);
-  console.log(`[Next.js] Fetched repo details: ${Date.now() - d}ms`);
+  const [issues, repoDetails] = await Promise.all([
+    getIssues(accessToken),
+    getRepoDetails(accessToken),
+  ]);
 
   return {
     props: {
       issues,
-      stargazers_count,
-      forks_count,
+      stargazers_count: repoDetails.stargazers_count,
+      forks_count: repoDetails.forks_count,
     },
   };
 }

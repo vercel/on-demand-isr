@@ -18,27 +18,21 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  let d = Date.now();
-
   const token = getGitHubJWT();
   const installation = await getInstallation(token);
   const accessToken = await getAccessToken(installation.id, token);
-  const issue = await getIssue(accessToken, params.id);
-  const comments = await getIssueComments(accessToken, params.id);
-
-  console.log(`[Next.js] Running getStaticProps...`);
-  console.log(`[Next.js] Fetched issues: ${Date.now() - d}ms`);
-
-  d = Date.now();
-  const { stargazers_count, forks_count } = await getRepoDetails(accessToken);
-  console.log(`[Next.js] Fetched repo details: ${Date.now() - d}ms`);
+  const [issue, comments, repoDetails] = await Promise.all([
+    getIssue(accessToken, params.id),
+    getIssueComments(accessToken, params.id),
+    getRepoDetails(accessToken),
+  ]);
 
   return {
     props: {
       issue,
       comments,
-      stargazers_count,
-      forks_count,
+      stargazers_count: repoDetails.stargazers_count,
+      forks_count: repoDetails.forks_count,
     },
   };
 }
