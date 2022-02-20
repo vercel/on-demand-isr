@@ -149,7 +149,7 @@ export default function Layout({
         ) : (
           <div className={styles.issue_comments}>
             <a
-              href={`https://github.com/leerob/on-demand-isr/${router.query.id}`}
+              href={`https://github.com/leerob/on-demand-isr/issues/${router.query.id}`}
               target="_blank"
               rel="noreferrer"
             >
