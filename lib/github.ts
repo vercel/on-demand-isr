@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { promises as fs } from 'fs';
-import path from 'path';
+
+let accessToken;
 
 async function getAccessToken(installationId: number, token: string) {
   const data = await fetchGitHub(
@@ -50,24 +50,18 @@ export async function fetchGitHub(path: string, token: string, opts: any = {}) {
 }
 
 export async function readAccessToken() {
-  try {
-    await fs.access(path.join(process.cwd(), 'token.json'));
-  } catch {
-    // Cached token does not exist, save to fs
+  // check if exists
+  if (!accessToken) {
     await setAccessToken();
   }
 
-  const data = await fs.readFile(path.join(process.cwd(), 'token.json'));
-  return JSON.parse(data as unknown as string);
+  return accessToken;
 }
 
 export async function setAccessToken() {
   const jwt = getGitHubJWT();
   const installation = await getInstallation(jwt);
-  const token = await getAccessToken(installation.id, jwt);
+  accessToken = await getAccessToken(installation.id, jwt);
 
-  return fs.writeFile(
-    path.join(process.cwd(), 'token.json'),
-    JSON.stringify(token)
-  );
+  return accessToken;
 }
