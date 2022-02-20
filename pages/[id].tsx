@@ -1,3 +1,4 @@
+import { PHASE_PRODUCTION_BUILD } from 'next/constants';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 import styles from '../styles/Home.module.scss';
@@ -5,12 +6,17 @@ import Layout from '../components/Layout';
 import Image from 'next/image';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
-import { fetchGitHub, readAccessToken } from '../lib/github';
+import { fetchGitHub, readAccessToken, setAccessToken } from '../lib/github';
 
 TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 export async function getStaticPaths() {
+  if (process.env.NEXT_PHASE === PHASE_PRODUCTION_BUILD) {
+    // Don't read from cache on-demand
+    await setAccessToken();
+  }
+
   return {
     paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
     fallback: 'blocking',
