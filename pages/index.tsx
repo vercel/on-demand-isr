@@ -16,6 +16,8 @@ export async function getStaticProps() {
     getRepoDetails(accessToken),
   ]);
 
+  console.log('[Next.js] Running getStaticProps for /');
+  console.log(`[Next.js] Issues: ${issues.length}`);
   return {
     props: {
       issues,

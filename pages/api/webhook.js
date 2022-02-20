@@ -32,8 +32,10 @@ export default async function handleWebhook(req, res) {
 
     // issue opened or edited
     // comment created or edited
+    console.log('[Next.js] Revalidating /');
     await res.unstable_revalidate('/');
     if (issueNumber) {
+      console.log(`[Next.js] Revalidating /${issueNumber}`);
       await res.unstable_revalidate(`/${issueNumber}`);
     }
 

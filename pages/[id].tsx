@@ -11,6 +11,7 @@ TimeAgo.addDefaultLocale(en);
 const timeAgo = new TimeAgo('en-US');
 
 export async function getStaticPaths() {
+  console.log('[Next.js] Running getStaticPaths for issue page');
   return {
     paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
     fallback: 'blocking',
@@ -24,6 +25,9 @@ export async function getStaticProps({ params }) {
     getIssueComments(accessToken, params.id),
     getRepoDetails(accessToken),
   ]);
+
+  console.log(`[Next.js] Running getStaticProps for /${params.id}`);
+  console.log(`[Next.js] [${params.id}] Comments: ${comments.length}`);
 
   return {
     props: {
