@@ -33,7 +33,9 @@ export default async function handleWebhook(req, res) {
     // issue opened or edited
     // comment created or edited
     await res.unstable_revalidate('/');
-    await res.unstable_revalidate(`/${issueNumber}`);
+    if (issueNumber) {
+      await res.unstable_revalidate(`/${issueNumber}`);
+    }
 
     return res.status(200).send('Success!');
   } else {
