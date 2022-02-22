@@ -51,9 +51,9 @@ export default function Layout({
             pushed to the edge, on demand. The webhook on the Next.js app side
             executes a new{' '}
             <a
-              href="https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration.md#on-demand-revalidation-beta"
+              href="https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#using-on-demand-revalidation"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
               <code>`res.unstable_revalidate()`</code>
             </a>{' '}
