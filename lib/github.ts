@@ -30,8 +30,8 @@ async function getInstallation(token: string) {
   return installations.find((i: any) => i.account.login === 'leerob');
 }
 
-export async function fetchGitHub(path: string, token: string, opts: any = {}) {
-  const req = await fetch(`https://api.github.com${path}`, {
+function createGitHubRequest(path: string, token: string, opts: any = {}) {
+  return fetch(`https://api.github.com${path}`, {
     ...opts,
     headers: {
       ...opts.headers,
@@ -40,10 +40,16 @@ export async function fetchGitHub(path: string, token: string, opts: any = {}) {
       Accept: 'application/vnd.github.v3+json',
     },
   });
+}
+
+export async function fetchGitHub(path: string, token: string, opts: any = {}) {
+  let req = await createGitHubRequest(path, token, opts);
 
   if (req.status === 401) {
-    // JWT has expired, cache a new one
+    // JWT has expired, cache a new token
     await setAccessToken();
+    // Retry request with new cached access token
+    req = await createGitHubRequest(path, accessToken, opts);
   }
 
   return req.json();
