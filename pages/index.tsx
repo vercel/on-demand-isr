@@ -45,7 +45,7 @@ export default function Home({ issues, stargazers_count, forks_count }: any) {
       <div className={styles.issues}>
         {issues.map((issue: any) => (
           <Link key={issue.number} href={`/${issue.number}`}>
-            <a className={styles.issue} key={issue.id}>
+            <a className={styles.issue}>
               <IssueIcon />
               <div>
                 <div className={styles.issue_title}>{issue.title}</div>
