@@ -1,14 +1,10 @@
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en.json';
 import styles from '../styles/Home.module.scss';
 import Layout from '../components/Layout';
 import Image from 'next/image';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 import { fetchGitHub, readAccessToken } from '../lib/github';
-
-TimeAgo.addDefaultLocale(en);
-const timeAgo = new TimeAgo('en-US');
+import timeago from 'timeago.js';
 
 export async function getStaticPaths() {
   console.log('[Next.js] Running getStaticPaths for issue page');
@@ -74,8 +70,8 @@ export default function Issue({ issue, comments }: any) {
       <div className={styles.comments}>
         <a
           href={issue.html_url}
-          target="_blank"
-          rel="noreferrer"
+          target='_blank'
+          rel='noreferrer'
           className={styles.comment}
           key={issue.id}
         >
@@ -84,7 +80,7 @@ export default function Issue({ issue, comments }: any) {
               src={issue.user?.avatar_url || '/avatar.png'}
               alt={issue.user.login}
               className={styles.rounded}
-              objectFit="cover"
+              objectFit='cover'
               height={32}
               width={32}
             />
@@ -92,7 +88,7 @@ export default function Issue({ issue, comments }: any) {
           <div className={styles.comment_div}>
             <div className={styles.comment_timestamp}>
               <b>{issue.user.login}</b> commented{' '}
-              {timeAgo.format(new Date(issue.created_at))}
+              {timeago.format(issue.created_at)}
             </div>
             <div
               dangerouslySetInnerHTML={{
@@ -107,8 +103,8 @@ export default function Issue({ issue, comments }: any) {
         {comments.map((comment: any) => (
           <a
             href={comment.html_url}
-            target="_blank"
-            rel="noreferrer"
+            target='_blank'
+            rel='noreferrer'
             className={styles.comment}
             key={comment.id}
           >
@@ -117,7 +113,7 @@ export default function Issue({ issue, comments }: any) {
                 src={comment.user?.avatar_url || '/avatar.png'}
                 alt={comment.user.login}
                 className={styles.rounded}
-                objectFit="cover"
+                objectFit='cover'
                 height={32}
                 width={32}
               />
@@ -125,7 +121,7 @@ export default function Issue({ issue, comments }: any) {
             <div className={styles.comment_div}>
               <div className={styles.comment_timestamp}>
                 <b>{comment.user.login}</b> commented{' '}
-                {timeAgo.format(new Date(comment.created_at))}
+                {timeago.format(comment.created_at)}
               </div>
               <div
                 dangerouslySetInnerHTML={{

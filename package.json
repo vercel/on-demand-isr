@@ -8,14 +8,14 @@
   },
   "dependencies": {
     "highlight.js": "^11.4.0",
-    "javascript-time-ago": "^2.3.13",
     "jsonwebtoken": "^8.5.1",
     "marked": "^4.0.12",
     "next": "^12.1.0",
     "postcss-hover-media-feature": "^1.0.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sass": "^1.49.7"
+    "sass": "^1.49.7",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.8",

@@ -1,13 +1,9 @@
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en.json';
 import styles from '../styles/Home.module.scss';
 import Link from 'next/link';
 import Layout from '../components/Layout';
 import { CommentIcon, IssueIcon } from '../components/icons';
 import { fetchGitHub, readAccessToken } from '../lib/github';
-
-TimeAgo.addDefaultLocale(en);
-const timeAgo = new TimeAgo('en-US');
+import timeago from 'timeago.js';
 
 export async function getStaticProps() {
   const accessToken = await readAccessToken();
@@ -50,8 +46,7 @@ export default function Home({ issues, stargazers_count, forks_count }: any) {
               <div>
                 <div className={styles.issue_title}>{issue.title}</div>
                 <div className={styles.issue_desc}>
-                  #{issue.number} opened{' '}
-                  {timeAgo.format(new Date(issue.created_at))} by{' '}
+                  #{issue.number} opened {timeago.format(issue.created_at)} by{' '}
                   {issue.user.login}
                 </div>
               </div>
