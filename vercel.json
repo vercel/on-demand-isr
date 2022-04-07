@@ -1,0 +1,7 @@
+{
+  "build": {
+    "env": {
+      "NEXT_PRIVATE_MULTI_PAYLOAD": "1"
+    }
+  }
+}
