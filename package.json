@@ -11,7 +11,7 @@
     "javascript-time-ago": "^2.3.13",
     "jsonwebtoken": "^8.5.1",
     "marked": "^4.0.12",
-    "next": "^12.1.4",
+    "next": "12.1.5-canary.4",
     "postcss-hover-media-feature": "^1.0.2",
     "react": "18.0.0",
     "react-dom": "18.0.0",
