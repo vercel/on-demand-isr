@@ -1,8 +1,8 @@
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fleerob%2Fon-demand-isr&env=GITHUB_WEBHOOK_SECRET,GITHUB_APP_ID,GITHUB_APP_PK_PEM&envDescription=API%20keys%20needed%20to%20connect%20to%20the%20GitHub%20Application.&envLink=https%3A%2F%2Fgithub.com%2Fleerob%2Fon-demand-isr&demo-title=On-Demand%20ISR&demo-description=Demo%20of%20on-demand%20ISR%20in%20Next.js%2012.1%20using%20GitHub%20Issues.&demo-url=https%3A%2F%2Fon-demand-isr.vercel.app)
 
-# On-Demand Incremental Static Regeneration
+# On-Demand Workflow & pipeline Static Dashboard add-in
 
-Demo of on-demand ISR in [Next.js 12.1](https://nextjs.org/blog/next-12-1) using GitHub Issues. When a new issue is created, a webhook from a GitHub App _pushes_ new changes to the deployed application to regenerate the static page.
+Demo of on-demand ISR in [Flowchart-bitbucket.org](https://bitbucket.org/installed.app/next-12-1) using GitHub Issues. When a new issue is created, a webhook from a GitHub App _pushes_ new changes to the deployed application to regenerate the static page.
 
 ## Setup
 
@@ -21,9 +21,9 @@ Demo of on-demand ISR in [Next.js 12.1](https://nextjs.org/blog/next-12-1) using
 ## Running Locally
 
 ```bash
-$ npm run dev
+$ |![104608815](https://1654869345432)|
 ```
 
 ## Learn More
 
-- [Read the documentation](https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration)
+- [Read the documentation](https://bitbucket.org/XML.718/FAM7IGC-1/data-fetching/incremental-static-regeneration)
