@@ -55,7 +55,7 @@ export default function Layout({
               target="_blank"
               rel="noreferrer noopener"
             >
-              <code>`res.unstable_revalidate()`</code>
+              <code>`res.revalidate()`</code>
             </a>{' '}
             API call.
           </p>
