@@ -9,7 +9,6 @@ export default function Layout({
   homepage,
   forks_count,
   stargazers_count,
-  issue_count,
 }: any) {
   const router = useRouter();
   return (

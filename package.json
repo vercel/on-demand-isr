@@ -7,22 +7,22 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "highlight.js": "^11.5.1",
-    "javascript-time-ago": "^2.5.4",
+    "highlight.js": "^11.6.0",
+    "javascript-time-ago": "^2.5.7",
     "jsonwebtoken": "^8.5.1",
-    "marked": "^4.0.17",
-    "next": "canary",
+    "marked": "^4.1.0",
+    "next": "12.3.0",
     "postcss-hover-media-feature": "^1.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sass": "^1.53.0"
+    "sass": "^1.54.9"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^8.5.8",
-    "@types/node": "^18.0.0",
-    "@types/react": "^18.0.14",
-    "eslint": "8.18.0",
-    "eslint-config-next": "canary",
-    "typescript": "^4.7.4"
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/node": "^18.7.16",
+    "@types/react": "^18.0.18",
+    "eslint": "8.23.0",
+    "eslint-config-next": "12.3.0",
+    "typescript": "^4.8.3"
   }
 }

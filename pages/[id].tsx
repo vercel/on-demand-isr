@@ -29,6 +29,12 @@ export async function getStaticProps({ params }) {
   console.log(`[Next.js] Running getStaticProps for /${params.id}`);
   console.log(`[Next.js] [${params.id}] Comments: ${comments.length}`);
 
+  if (issue.message === 'Not Found') {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       issue,
@@ -70,7 +76,7 @@ function markdownToHtml(markdown) {
 
 export default function Issue({ issue, comments }: any) {
   return (
-    <Layout issue_count={issue.comments}>
+    <Layout>
       <div className={styles.comments}>
         <a
           href={issue.html_url}
