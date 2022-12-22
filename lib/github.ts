@@ -1,4 +1,6 @@
+import 'server-only';
 import jwt from 'jsonwebtoken';
+import { notFound } from 'next/navigation';
 
 let accessToken;
 
@@ -70,4 +72,45 @@ export async function setAccessToken() {
   accessToken = await getAccessToken(installation.id, jwt);
 
   return accessToken;
+}
+
+export async function fetchIssueAndRepoData() {
+  const [issues, repoDetails] = await Promise.all([
+    fetchGitHub('/repos/leerob/on-demand-isr/issues', accessToken),
+    fetchGitHub('/repos/leerob/on-demand-isr', accessToken),
+  ]);
+
+  console.log('[Next.js] Fetching data for /');
+  console.log(`[Next.js] Issues: ${issues.length}`);
+
+  return {
+    issues,
+    stargazers_count: repoDetails.stargazers_count,
+    forks_count: repoDetails.forks_count,
+  };
+}
+
+export async function fetchIssuePageData(id: string) {
+  const [issue, comments, repoDetails] = await Promise.all([
+    fetchGitHub(`/repos/leerob/on-demand-isr/issues/${id}`, accessToken),
+    fetchGitHub(
+      `/repos/leerob/on-demand-isr/issues/${id}/comments`,
+      accessToken
+    ),
+    fetchGitHub('/repos/leerob/on-demand-isr', accessToken),
+  ]);
+
+  console.log(`[Next.js] Fetching data for /${id}`);
+  console.log(`[Next.js] [${id}] Comments: ${comments.length}`);
+
+  if (issue.message === 'Not Found') {
+    notFound();
+  }
+
+  return {
+    issue,
+    comments,
+    stargazers_count: repoDetails.stargazers_count,
+    forks_count: repoDetails.forks_count,
+  };
 }
