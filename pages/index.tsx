@@ -44,24 +44,24 @@ export default function Home({ issues, stargazers_count, forks_count }: any) {
     >
       <div className={styles.issues}>
         {issues.map((issue: any) => (
-          <Link key={issue.number} href={`/${issue.number}`}>
-            <a className={styles.issue}>
-              <IssueIcon />
-              <div>
-                <div className={styles.issue_title}>{issue.title}</div>
-                <div className={styles.issue_desc}>
-                  #{issue.number} opened{' '}
-                  {timeAgo.format(new Date(issue.created_at))} by{' '}
-                  {issue.user.login}
-                </div>
+          (<Link key={issue.number} href={`/${issue.number}`} className={styles.issue}>
+
+            <IssueIcon />
+            <div>
+              <div className={styles.issue_title}>{issue.title}</div>
+              <div className={styles.issue_desc}>
+                #{issue.number} opened{' '}
+                {timeAgo.format(new Date(issue.created_at))} by{' '}
+                {issue.user.login}
               </div>
-              {issue.comments > 0 && (
-                <div className={styles.comment_count}>
-                  <CommentIcon /> {new Number(issue.comments).toLocaleString()}
-                </div>
-              )}
-            </a>
-          </Link>
+            </div>
+            {issue.comments > 0 && (
+              <div className={styles.comment_count}>
+                <CommentIcon /> {new Number(issue.comments).toLocaleString()}
+              </div>
+            )}
+
+          </Link>)
         ))}
       </div>
     </Layout>
