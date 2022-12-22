@@ -9,6 +9,10 @@ import { fetchIssuePageData } from '../../lib/github';
 export const dynamic = 'force-static',
   dynamicParams = true;
 
+export function generateStaticParams() {
+  return [];
+}
+
 function markdownToHtml(markdown) {
   if (!markdown) {
     return null;
