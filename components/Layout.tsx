@@ -112,7 +112,7 @@ export default function Layout({
           </a>{' '}
           /{' '}
           <Link href="/">
-            <a>on-demand-isr</a>
+            on-demand-isr
           </Link>
           {router.query.id && (
             <>
