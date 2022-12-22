@@ -87,10 +87,9 @@ export default function Issue({ issue, comments }: any) {
         >
           <div className={styles.image}>
             <Image
-              src={issue.user?.avatar_url || '/avatar.png'}
               alt={issue.user.login}
+              src={issue.user?.avatar_url || '/avatar.png'}
               className={styles.rounded}
-              objectFit="cover"
               height={32}
               width={32}
             />
@@ -120,10 +119,9 @@ export default function Issue({ issue, comments }: any) {
           >
             <div className={styles.image}>
               <Image
-                src={comment.user?.avatar_url || '/avatar.png'}
                 alt={comment.user.login}
+                src={comment.user?.avatar_url || '/avatar.png'}
                 className={styles.rounded}
-                objectFit="cover"
                 height={32}
                 width={32}
               />
