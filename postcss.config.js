@@ -1,3 +1,6 @@
 module.exports = {
-  plugins: ['postcss-hover-media-feature'],
-};
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
