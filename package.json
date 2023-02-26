@@ -10,20 +10,20 @@
     "highlight.js": "^11.7.0",
     "javascript-time-ago": "^2.5.9",
     "jsonwebtoken": "^9.0.0",
-    "marked": "^4.2.4",
+    "marked": "^4.2.12",
     "next": "^13.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sass": "^1.57.1",
+    "sass": "^1.58.3",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
-    "@types/jsonwebtoken": "^8.5.9",
-    "@types/node": "^18.11.17",
-    "@types/react": "^18.0.26",
-    "eslint": "8.30.0",
-    "eslint-config-next": "^13.0.8-canary.3",
-    "postcss": "^8.4.20",
-    "typescript": "^4.9.4"
+    "@types/jsonwebtoken": "^9.0.1",
+    "@types/node": "^18.14.2",
+    "@types/react": "^18.0.28",
+    "eslint": "8.35.0",
+    "eslint-config-next": "^13.2.1",
+    "postcss": "^8.4.21",
+    "typescript": "^4.9.5"
   }
 }
