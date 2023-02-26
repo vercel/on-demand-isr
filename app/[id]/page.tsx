@@ -5,13 +5,7 @@ import Image from 'next/image';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 import { fetchIssuePageData } from '../../lib/github';
-
-export const dynamic = 'force-static',
-  dynamicParams = true;
-
-export function generateStaticParams() {
-  return [];
-}
+import avatar from '../avatar.png';
 
 function markdownToHtml(markdown) {
   if (!markdown) {
@@ -48,7 +42,7 @@ export default async function IssuePage({
         <div className={styles.image}>
           <Image
             alt={issue.user.login}
-            src={issue.user?.avatar_url || '/avatar.png'}
+            src={issue.user?.avatar_url || avatar}
             className={styles.rounded}
             height={32}
             width={32}
@@ -79,7 +73,7 @@ export default async function IssuePage({
           <div className={styles.image}>
             <Image
               alt={comment.user.login}
-              src={comment.user?.avatar_url || '/avatar.png'}
+              src={comment.user?.avatar_url || avatar}
               className={styles.rounded}
               height={32}
               width={32}
