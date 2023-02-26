@@ -14,6 +14,12 @@ async function getAccessToken(installationId: number, token: string) {
 }
 
 function getGitHubJWT() {
+  if (!process.env.GITHUB_APP_ID || !process.env.GITHUB_APP_PK_PEM) {
+    throw new Error(
+      'GITHUB_APP_ID and GITHUB_APP_PK_PEM must be defined in .env.local'
+    );
+  }
+
   return jwt.sign(
     {
       iat: Math.floor(Date.now() / 1000) - 60,
