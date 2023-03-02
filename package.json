@@ -11,7 +11,7 @@
     "javascript-time-ago": "^2.5.9",
     "jsonwebtoken": "^9.0.0",
     "marked": "^4.2.12",
-    "next": "^13.2.1",
+    "next": "^13.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sass": "^1.58.3",
@@ -19,10 +19,10 @@
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.1",
-    "@types/node": "^18.14.2",
+    "@types/node": "^18.14.3",
     "@types/react": "^18.0.28",
     "eslint": "8.35.0",
-    "eslint-config-next": "^13.2.1",
+    "eslint-config-next": "^13.2.3",
     "postcss": "^8.4.21",
     "typescript": "^4.9.5"
   }
