@@ -1,11 +1,10 @@
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en.json';
 import styles from '../../styles/Home.module.scss';
 import Image from 'next/image';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
 import { fetchIssuePageData } from '../../lib/github';
 import avatar from '../avatar.png';
+import getFormattedTime from '../time-ago';
 
 export const dynamic = 'force-static',
   dynamicParams = true;
@@ -33,8 +32,6 @@ export default async function IssuePage({
 }: {
   params: { id: string };
 }) {
-  TimeAgo.addDefaultLocale(en);
-  const timeAgo = new TimeAgo('en-US');
   const { issue, comments } = await fetchIssuePageData(params.id);
 
   return (
@@ -58,7 +55,7 @@ export default async function IssuePage({
         <div className={styles.comment_div}>
           <div className={styles.comment_timestamp}>
             <b>{issue.user.login}</b> commented{' '}
-            {timeAgo.format(new Date(issue.created_at))}
+            {getFormattedTime(issue.created_at)}
           </div>
           <div
             dangerouslySetInnerHTML={{
@@ -89,7 +86,7 @@ export default async function IssuePage({
           <div className={styles.comment_div}>
             <div className={styles.comment_timestamp}>
               <b>{comment.user.login}</b> commented{' '}
-              {timeAgo.format(new Date(comment.created_at))}
+              {getFormattedTime(comment.created_at)}
             </div>
             <div
               dangerouslySetInnerHTML={{

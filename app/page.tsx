@@ -1,5 +1,3 @@
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en.json';
 import styles from '../styles/Home.module.scss';
 import Link from 'next/link';
 import {
@@ -11,10 +9,9 @@ import {
 } from './icons';
 import { fetchIssueAndRepoData } from '../lib/github';
 import Explanation from './explanation';
+import getFormattedTime from './time-ago';
 
 export default async function Page() {
-  TimeAgo.addDefaultLocale(en);
-  const timeAgo = new TimeAgo('en-US');
   const { issues, forks_count, stargazers_count } =
     await fetchIssueAndRepoData();
 
@@ -61,8 +58,7 @@ export default async function Page() {
             <div>
               <div className={styles.issue_title}>{issue.title}</div>
               <div className={styles.issue_desc}>
-                #{issue.number} opened{' '}
-                {timeAgo.format(new Date(issue.created_at))} by{' '}
+                #{issue.number} opened {getFormattedTime(issue.created_at)} by{' '}
                 {issue.user.login}
               </div>
             </div>
