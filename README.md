@@ -2,7 +2,7 @@
 
 # On-Demand Incremental Static Regeneration
 
-Demo of on-demand ISR in [Next.js 12.1](https://nextjs.org/blog/next-12-1) using GitHub Issues. When a new issue is created, a webhook from a GitHub App _pushes_ new changes to the deployed application to regenerate the static page.
+Demo of on-demand ISR in [Next.js](https://nextjs.org/docs/app/building-your-application/data-fetching/revalidating#on-demand-revalidation) using GitHub Issues. When a new issue is created, a webhook from a GitHub App _pushes_ new changes to the deployed application to regenerate the static page.
 
 ## Setup
 

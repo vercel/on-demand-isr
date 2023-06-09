@@ -33,7 +33,7 @@ export default function Explanation() {
           off a webhook and the impacted pages get re-rendered and pushed to the
           edge, on demand. The webhook on the Next.js app side executes a new{' '}
           <a
-            href="https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration#using-on-demand-revalidation"
+            href="https://nextjs.org/docs/app/building-your-application/data-fetching/revalidating#on-demand-revalidation"
             target="_blank"
             rel="noreferrer noopener"
           >
