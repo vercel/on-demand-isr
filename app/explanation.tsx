@@ -4,8 +4,7 @@ export default function Explanation() {
   return (
     <div className={styles.explanation}>
       <p>
-        This app demonstrates the new <b>*On-Demand ISR support*</b> in Next.js
-        12.1 (
+        This app demonstrates <b>*On-Demand ISR support*</b> in Next.js (
         <a
           href="https://github.com/leerob/on-demand-isr"
           target="_blank"
@@ -33,11 +32,11 @@ export default function Explanation() {
           off a webhook and the impacted pages get re-rendered and pushed to the
           edge, on demand. The webhook on the Next.js app side executes a new{' '}
           <a
-            href="https://nextjs.org/docs/app/building-your-application/data-fetching/revalidating#on-demand-revalidation"
+            href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#revalidating-data"
             target="_blank"
             rel="noreferrer noopener"
           >
-            <code>`res.revalidate()`</code>
+            <code>`revalidatePath()`</code>
           </a>{' '}
           API call.
         </p>
@@ -51,7 +50,7 @@ export default function Explanation() {
         <p>
           Unlike <code>`revalidate`</code>{' '}
           <a
-            href="https://nextjs.org/docs/basic-features/data-fetching/incremental-static-regeneration"
+            href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#time-based-revalidation"
             target="_blank"
             rel="noreferrer"
           >

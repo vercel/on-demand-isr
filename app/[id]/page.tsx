@@ -1,6 +1,7 @@
 import styles from '../../styles/Home.module.scss';
 import Image from 'next/image';
-import { marked } from 'marked';
+import { Marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
 import { fetchIssuePageData } from '../../lib/github';
 import avatar from '../avatar.png';
@@ -15,16 +16,20 @@ export function generateStaticParams() {
 
 function markdownToHtml(markdown) {
   if (!markdown) {
-    return null;
+    return '';
   }
 
-  marked.setOptions({
-    highlight: function (code, language) {
-      return hljs.highlight(code, { language }).value;
-    },
-  });
+  const marked = new Marked(
+    markedHighlight({
+      langPrefix: 'hljs language-',
+      highlight(code, lang) {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        return hljs.highlight(code, { language }).value;
+      },
+    })
+  );
 
-  return marked(markdown);
+  return marked.parse(markdown) as string;
 }
 
 export default async function IssuePage({
@@ -57,7 +62,7 @@ export default async function IssuePage({
             <b>{issue.user.login}</b> commented{' '}
             {getFormattedTime(issue.created_at)}
           </div>
-          <div
+          <section
             dangerouslySetInnerHTML={{
               __html:
                 markdownToHtml(issue.body) || '<i>No description provided.</i>',
@@ -88,7 +93,7 @@ export default async function IssuePage({
               <b>{comment.user.login}</b> commented{' '}
               {getFormattedTime(comment.created_at)}
             </div>
-            <div
+            <section
               dangerouslySetInnerHTML={{
                 __html: markdownToHtml(comment.body),
               }}
