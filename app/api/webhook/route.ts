@@ -8,13 +8,14 @@ export async function POST(request: Request) {
       'sha256',
       process.env.GITHUB_WEBHOOK_SECRET || ''
     );
-    const digest = Buffer.from(hmac.update(text).digest('hex'), 'utf8');
-    const signature = Buffer.from(
-      request.headers.get('x-hub-signature-256') as string,
+    const digest = 'sha256=' + hmac.update(text).digest('hex');
+    const signature = request.headers.get('x-hub-signature-256') as string;
+    const signatureBuffer = Buffer.from(
+      signature.replace('sha256=', ''),
       'utf8'
     );
 
-    if (!crypto.timingSafeEqual(digest, signature)) {
+    if (!crypto.timingSafeEqual(Buffer.from(digest, 'utf8'), signatureBuffer)) {
       return new Response('Invalid signature.', {
         status: 400,
       });
