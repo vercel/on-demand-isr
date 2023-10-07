@@ -4,18 +4,23 @@ import { revalidatePath } from 'next/cache';
 export async function POST(request: Request) {
   try {
     const text = await request.text();
-    const hmac = crypto.createHmac(
-      'sha256',
-      process.env.GITHUB_WEBHOOK_SECRET || ''
-    );
-    const digest = 'sha256=' + hmac.update(text).digest('hex');
-    const signature = request.headers.get('x-hub-signature-256') as string;
-    const signatureBuffer = Buffer.from(
-      signature.replace('sha256=', ''),
-      'utf8'
+
+    const signature = crypto
+      .createHmac('sha256', process.env.GITHUB_WEBHOOK_SECRET || '')
+      .update(text)
+      .digest('hex');
+
+    const trusted = Buffer.from(`sha256=${signature}`, 'ascii');
+    const untrusted = Buffer.from(
+      request.headers.get('x-hub-signature-256') || '',
+      'ascii'
     );
 
-    if (!crypto.timingSafeEqual(Buffer.from(digest, 'utf8'), signatureBuffer)) {
+    if (!crypto.timingSafeEqual(trusted, untrusted)) {
+      console.log('[Next.js] Invalid signature.', {
+        trusted: trusted.toString('hex'),
+        untrusted: untrusted.toString('hex'),
+      });
       return new Response('Invalid signature.', {
         status: 400,
       });
