@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { GitHubIcon, LinkIcon } from '../icons';
 import Explanation from '../explanation';
 
-export default async function IssueLayout({
+export default function IssueLayout({
   children,
   params,
 }: {

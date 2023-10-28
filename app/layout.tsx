@@ -1,9 +1,10 @@
 import '../styles/globals.css';
 
 export const metadata = {
-  title: 'On-Demand Incremental Static Regeneration with Next.js 12.1',
+  title: 'On-Demand Incremental Static Regeneration with Next.js',
 };
-export default async function RootLayout({
+
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
