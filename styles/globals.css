@@ -6,6 +6,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   color: #8b949e;
   background: #0d1117;
+  scrollbar-gutter: stable;
 }
 
 a {
