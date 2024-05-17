@@ -22,24 +22,24 @@ export default async function Page() {
         <div className={styles.repo_title}>
           <GitHubIcon />{' '}
           <a
-            href="https://github.com/leerob/on-demand-isr"
+            href="https://github.com/vercel/on-demand-isr"
             target="_blank"
             rel="noreferrer"
           >
-            leerob
+            vercel
           </a>{' '}
           / <Link href="/">on-demand-isr</Link>
         </div>
         <div className={styles.forks_stars}>
           <a
-            href="https://github.com/leerob/on-demand-isr/fork"
+            href="https://github.com/vercel/on-demand-isr/fork"
             target="_blank"
             rel="noreferrer"
           >
             <ForkIcon /> {new Number(forks_count).toLocaleString()}
           </a>
           <a
-            href="https://github.com/leerob/on-demand-isr"
+            href="https://github.com/vercel/on-demand-isr"
             target="_blank"
             rel="noreferrer"
           >

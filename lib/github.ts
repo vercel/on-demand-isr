@@ -35,7 +35,7 @@ function getGitHubJWT() {
 
 async function getInstallation(token: string) {
   const installations = await fetchGitHub('/app/installations', token);
-  return installations.find((i: any) => i.account.login === 'leerob');
+  return installations.find((i: any) => i.account.login === 'vercel');
 }
 
 function createGitHubRequest(path: string, token: string, opts: any = {}) {
@@ -82,8 +82,8 @@ export async function setAccessToken() {
 
 export async function fetchIssueAndRepoData() {
   const [issues, repoDetails] = await Promise.all([
-    fetchGitHub('/repos/leerob/on-demand-isr/issues', accessToken),
-    fetchGitHub('/repos/leerob/on-demand-isr', accessToken),
+    fetchGitHub('/repos/vercel/on-demand-isr/issues', accessToken),
+    fetchGitHub('/repos/vercel/on-demand-isr', accessToken),
   ]);
 
   console.log('[Next.js] Fetching data for /');
@@ -98,12 +98,12 @@ export async function fetchIssueAndRepoData() {
 
 export async function fetchIssuePageData(id: string) {
   const [issue, comments, repoDetails] = await Promise.all([
-    fetchGitHub(`/repos/leerob/on-demand-isr/issues/${id}`, accessToken),
+    fetchGitHub(`/repos/vercel/on-demand-isr/issues/${id}`, accessToken),
     fetchGitHub(
-      `/repos/leerob/on-demand-isr/issues/${id}/comments`,
+      `/repos/vercel/on-demand-isr/issues/${id}/comments`,
       accessToken
     ),
-    fetchGitHub('/repos/leerob/on-demand-isr', accessToken),
+    fetchGitHub('/repos/vercel/on-demand-isr', accessToken),
   ]);
 
   console.log(`[Next.js] Fetching data for /${id}`);

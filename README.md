@@ -1,4 +1,4 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fleerob%2Fon-demand-isr&env=GITHUB_WEBHOOK_SECRET,GITHUB_APP_ID,GITHUB_APP_PK_PEM&envDescription=API%20keys%20needed%20to%20connect%20to%20the%20GitHub%20Application.&envLink=https%3A%2F%2Fgithub.com%2Fleerob%2Fon-demand-isr&demo-title=On-Demand%20ISR&demo-description=Demo%20of%20on-demand%20ISR%20in%20Next.js%2012.1%20using%20GitHub%20Issues.&demo-url=https%3A%2F%2Fon-demand-isr.vercel.app)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fon-demand-isr&env=GITHUB_WEBHOOK_SECRET,GITHUB_APP_ID,GITHUB_APP_PK_PEM&envDescription=API%20keys%20needed%20to%20connect%20to%20the%20GitHub%20Application.&envLink=https%3A%2F%2Fgithub.com%2Fvercel%2Fon-demand-isr&demo-title=On-Demand%20ISR&demo-description=Demo%20of%20on-demand%20ISR%20in%20Next.js%2012.1%20using%20GitHub%20Issues.&demo-url=https%3A%2F%2Fon-demand-isr.vercel.app)
 
 # On-Demand Incremental Static Regeneration
 

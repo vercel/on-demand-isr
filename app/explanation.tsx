@@ -6,7 +6,7 @@ export default function Explanation() {
       <p>
         This app demonstrates <b>*On-Demand ISR support*</b> in Next.js (
         <a
-          href="https://github.com/leerob/on-demand-isr"
+          href="https://github.com/vercel/on-demand-isr"
           target="_blank"
           rel="noreferrer"
         >
@@ -22,7 +22,7 @@ export default function Explanation() {
         <p>
           When issues on the `
           <a
-            href="https://github.com/leerob/on-demand-isr"
+            href="https://github.com/vercel/on-demand-isr"
             target="_blank"
             rel="noreferrer"
           >
@@ -66,7 +66,7 @@ export default function Explanation() {
         <em>
           _💡 Try{' '}
           <a
-            href="https://github.com/leerob/on-demand-isr/issues/new"
+            href="https://github.com/vercel/on-demand-isr/issues/new"
             target="_blank"
             rel="noreferrer"
           >

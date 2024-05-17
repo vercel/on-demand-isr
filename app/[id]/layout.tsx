@@ -18,15 +18,15 @@ export default function IssueLayout({
         <div className={styles.repo_title}>
           <GitHubIcon />{' '}
           <a
-            href="https://github.com/leerob/on-demand-isr"
+            href="https://github.com/vercel/on-demand-isr"
             target="_blank"
             rel="noreferrer"
           >
-            leerob
+            vercel
           </a>{' '}
           / <Link href="/">on-demand-isr</Link> /{' '}
           <a
-            href={`https://github.com/leerob/on-demand-isr/issues/${params.id}`}
+            href={`https://github.com/vercel/on-demand-isr/issues/${params.id}`}
             target="_blank"
             rel="noreferrer"
           >
@@ -35,7 +35,7 @@ export default function IssueLayout({
         </div>
         <div className={styles.issue_comments}>
           <a
-            href={`https://github.com/leerob/on-demand-isr/issues/${params.id}`}
+            href={`https://github.com/vercel/on-demand-isr/issues/${params.id}`}
             target="_blank"
             rel="noreferrer"
           >
