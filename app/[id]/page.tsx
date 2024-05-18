@@ -40,6 +40,11 @@ export default async function IssuePage({
 }) {
   const { issue, comments } = await fetchIssuePageData(params.id);
 
+  // Filter out comments that contain "bot" in the title
+  const filteredComments = comments.filter(
+    (comment) => !comment.user.login.toLowerCase().includes('bot')
+  );
+
   return (
     <div className={styles.comments}>
       <a
@@ -74,7 +79,7 @@ export default async function IssuePage({
           />
         </div>
       </a>
-      {comments.map((comment: any) => (
+      {filteredComments.map((comment: any) => (
         <a
           href={comment.html_url}
           target="_blank"
