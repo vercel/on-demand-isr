@@ -10,6 +10,7 @@ import {
 import { fetchIssueAndRepoData } from '../lib/github';
 import Explanation from './explanation';
 import { Time } from './time-ago';
+import { Suspense } from 'react';
 
 export default async function Page() {
   const { issues, forks_count, stargazers_count } =
@@ -57,11 +58,13 @@ export default async function Page() {
             <IssueIcon />
             <div>
               <div className={styles.issue_title}>{issue.title}</div>
-              <div className={styles.issue_desc}>
-                {`#${issue.number} opened `}
-                <Time time={issue.created_at} />
-                {` by ${issue.user.login}`}
-              </div>
+              <Suspense>
+                <div className={styles.issue_desc}>
+                  {`#${issue.number} opened `}
+                  <Time time={issue.created_at} />
+                  {` by ${issue.user.login}`}
+                </div>
+              </Suspense>
             </div>
             {issue.comments > 0 && (
               <div className={styles.comment_count}>
