@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "highlight.js": "^11.9.0",
-    "javascript-time-ago": "^2.5.10",
     "jsonwebtoken": "^9.0.2",
     "marked": "^12.0.2",
     "marked-highlight": "^2.1.1",
