@@ -5,7 +5,7 @@ import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
 import { fetchIssuePageData } from '../../lib/github';
 import avatar from '../avatar.png';
-import getFormattedTime from '../time-ago';
+import { Time } from '../time-ago';
 
 export const dynamic = 'force-static',
   dynamicParams = true;
@@ -59,8 +59,7 @@ export default async function IssuePage({
         </div>
         <div className={styles.comment_div}>
           <div className={styles.comment_timestamp}>
-            <b>{issue.user.login}</b> commented{' '}
-            {getFormattedTime(issue.created_at)}
+            <b>{issue.user.login}</b> commented <Time time={issue.created_at} />
           </div>
           <section
             dangerouslySetInnerHTML={{
@@ -91,7 +90,7 @@ export default async function IssuePage({
           <div className={styles.comment_div}>
             <div className={styles.comment_timestamp}>
               <b>{comment.user.login}</b> commented{' '}
-              {getFormattedTime(comment.created_at)}
+              <Time time={comment.created_at} />
             </div>
             <section
               dangerouslySetInnerHTML={{

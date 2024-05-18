@@ -9,7 +9,7 @@ import {
 } from './icons';
 import { fetchIssueAndRepoData } from '../lib/github';
 import Explanation from './explanation';
-import getFormattedTime from './time-ago';
+import { Time } from './time-ago';
 
 export default async function Page() {
   const { issues, forks_count, stargazers_count } =
@@ -58,8 +58,9 @@ export default async function Page() {
             <div>
               <div className={styles.issue_title}>{issue.title}</div>
               <div className={styles.issue_desc}>
-                #{issue.number} opened {getFormattedTime(issue.created_at)} by{' '}
-                {issue.user.login}
+                {`#${issue.number} opened `}
+                <Time time={issue.created_at} />
+                {` by ${issue.user.login}`}
               </div>
             </div>
             {issue.comments > 0 && (
