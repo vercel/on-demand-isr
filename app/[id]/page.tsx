@@ -90,12 +90,12 @@ export default async function IssuePage({
             />
           </div>
           <div className={styles.comment_div}>
-            <Suspense>
-              <div className={styles.comment_timestamp}>
-                <b>{comment.user.login}</b> commented{' '}
+            <div className={styles.comment_timestamp}>
+              <b>{comment.user.login}</b> commented{' '}
+              <Suspense>
                 <Time time={comment.created_at} />
-              </div>
-            </Suspense>
+              </Suspense>
+            </div>
             <section
               dangerouslySetInnerHTML={{
                 __html: markdownToHtml(comment.body),
