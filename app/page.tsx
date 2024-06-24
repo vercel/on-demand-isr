@@ -58,13 +58,13 @@ export default async function Page() {
             <IssueIcon />
             <div>
               <div className={styles.issue_title}>{issue.title}</div>
-              <Suspense>
-                <div className={styles.issue_desc}>
+              <div className={styles.issue_desc}>
+                <Suspense>
                   {`#${issue.number} opened `}
                   <Time time={issue.created_at} />
                   {` by ${issue.user.login}`}
-                </div>
-              </Suspense>
+                </Suspense>
+              </div>
             </div>
             {issue.comments > 0 && (
               <div className={styles.comment_count}>

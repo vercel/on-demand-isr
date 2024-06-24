@@ -1,19 +1,12 @@
-import styles from '../../styles/Home.module.scss';
+import { Suspense } from 'react';
 import Image from 'next/image';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
+import styles from '../../styles/Home.module.scss';
 import { fetchIssuePageData } from '../../lib/github';
 import avatar from '../avatar.png';
 import { Time } from '../time-ago';
-import { Suspense } from 'react';
-
-export const dynamic = 'force-static',
-  dynamicParams = true;
-
-export function generateStaticParams() {
-  return [];
-}
 
 function markdownToHtml(markdown) {
   if (!markdown) {
@@ -40,6 +33,11 @@ export default async function IssuePage({
 }) {
   const { issue, comments } = await fetchIssuePageData(params.id);
 
+  // Filter out comments that contain "bot" in the title
+  const filteredComments = comments.filter(
+    (comment) => !comment.user.login.toLowerCase().includes('bot')
+  );
+
   return (
     <div className={styles.comments}>
       <a
@@ -59,12 +57,12 @@ export default async function IssuePage({
           />
         </div>
         <div className={styles.comment_div}>
-          <Suspense>
-            <div className={styles.comment_timestamp}>
-              <b>{issue.user.login}</b> commented{' '}
+          <div className={styles.comment_timestamp}>
+            <b>{issue.user.login}</b> commented{' '}
+            <Suspense>
               <Time time={issue.created_at} />
-            </div>
-          </Suspense>
+            </Suspense>
+          </div>
           <section
             dangerouslySetInnerHTML={{
               __html:
@@ -74,7 +72,7 @@ export default async function IssuePage({
           />
         </div>
       </a>
-      {comments.map((comment: any) => (
+      {filteredComments.map((comment: any) => (
         <a
           href={comment.html_url}
           target="_blank"
@@ -92,12 +90,12 @@ export default async function IssuePage({
             />
           </div>
           <div className={styles.comment_div}>
-            <Suspense>
-              <div className={styles.comment_timestamp}>
-                <b>{comment.user.login}</b> commented{' '}
+            <div className={styles.comment_timestamp}>
+              <b>{comment.user.login}</b> commented{' '}
+              <Suspense>
                 <Time time={comment.created_at} />
-              </div>
-            </Suspense>
+              </Suspense>
+            </div>
             <section
               dangerouslySetInnerHTML={{
                 __html: markdownToHtml(comment.body),
