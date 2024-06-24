@@ -1,19 +1,12 @@
-import styles from '../../styles/Home.module.scss';
+import { Suspense } from 'react';
 import Image from 'next/image';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
+import styles from '../../styles/Home.module.scss';
 import { fetchIssuePageData } from '../../lib/github';
 import avatar from '../avatar.png';
 import { Time } from '../time-ago';
-import { Suspense } from 'react';
-
-export const dynamic = 'force-static',
-  dynamicParams = true;
-
-export function generateStaticParams() {
-  return [];
-}
 
 function markdownToHtml(markdown) {
   if (!markdown) {
