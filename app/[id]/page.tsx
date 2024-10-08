@@ -1,12 +1,12 @@
-import { Suspense } from 'react';
-import Image from 'next/image';
-import { Marked } from 'marked';
-import { markedHighlight } from 'marked-highlight';
-import hljs from 'highlight.js';
-import styles from '../../styles/Home.module.scss';
-import { fetchIssuePageData } from '../../lib/github';
-import avatar from '../avatar.png';
-import { Time } from '../time-ago';
+import { Suspense } from "react";
+import Image from "next/image";
+import { Marked } from "marked";
+import { markedHighlight } from "marked-highlight";
+import hljs from "highlight.js";
+import styles from "../../styles/Home.module.scss";
+import { fetchIssuePageData } from "../../lib/github";
+import avatar from "../avatar.png";
+import { Time } from "../time-ago";
 
 export const dynamic = "force-static";
 export const dynamicParams = true;
@@ -15,16 +15,27 @@ export function generateStaticParams() {
   return [];
 }
 
+interface Comment {
+  html_url: string;
+  id: number;
+  user: {
+    login: string;
+    avatar_url?: string;
+  };
+  created_at: string;
+  body: string;
+}
+
 function markdownToHtml(markdown) {
   if (!markdown) {
-    return '';
+    return "";
   }
 
   const marked = new Marked(
     markedHighlight({
-      langPrefix: 'hljs language-',
+      langPrefix: "hljs language-",
       highlight(code, lang) {
-        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        const language = hljs.getLanguage(lang) ? lang : "plaintext";
         return hljs.highlight(code, { language }).value;
       },
     })
@@ -36,13 +47,14 @@ function markdownToHtml(markdown) {
 export default async function IssuePage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const { issue, comments } = await fetchIssuePageData(params.id);
+  const id = (await params).id
+  const { issue, comments } = await fetchIssuePageData(id);
 
   // Filter out comments that contain "bot" in the title
   const filteredComments = comments.filter(
-    (comment) => !comment.user.login.toLowerCase().includes('bot')
+    (comment) => !comment.user.login.toLowerCase().includes("bot")
   );
 
   return (
@@ -65,7 +77,7 @@ export default async function IssuePage({
         </div>
         <div className={styles.comment_div}>
           <div className={styles.comment_timestamp}>
-            <b>{issue.user.login}</b> commented{' '}
+            <b>{issue.user.login}</b> commented{" "}
             <Suspense>
               <Time time={issue.created_at} />
             </Suspense>
@@ -73,13 +85,13 @@ export default async function IssuePage({
           <section
             dangerouslySetInnerHTML={{
               __html:
-                markdownToHtml(issue.body) || '<i>No description provided.</i>',
+                markdownToHtml(issue.body) || "<i>No description provided.</i>",
             }}
             className={styles.comment_body}
           />
         </div>
       </a>
-      {filteredComments.map((comment: any) => (
+      {filteredComments.map((comment: Comment) => (
         <a
           href={comment.html_url}
           target="_blank"
@@ -98,7 +110,7 @@ export default async function IssuePage({
           </div>
           <div className={styles.comment_div}>
             <div className={styles.comment_timestamp}>
-              <b>{comment.user.login}</b> commented{' '}
+              <b>{comment.user.login}</b> commented{" "}
               <Suspense>
                 <Time time={comment.created_at} />
               </Suspense>
