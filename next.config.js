@@ -15,7 +15,4 @@ module.exports = {
       fullUrl: true,
     },
   },
-  experimental: {
-    ppr: true,
-  }
 };
