@@ -1,17 +1,17 @@
 import { unstable_noStore } from 'next/cache';
 
 function formatDate(date) {
-  let currentDate = new Date().getTime();
-  let targetDate = new Date(date).getTime();
-  let timeDifference = currentDate - targetDate;
+  const currentDate = new Date().getTime();
+  const targetDate = new Date(date).getTime();
+  const timeDifference = currentDate - targetDate;
 
-  let seconds = Math.floor(timeDifference / 1000);
-  let minutes = Math.floor(seconds / 60);
-  let hours = Math.floor(minutes / 60);
-  let days = Math.floor(hours / 24);
-  let weeks = Math.floor(days / 7);
-  let months = Math.floor(days / 30);
-  let years = Math.floor(days / 365);
+  const seconds = Math.floor(timeDifference / 1000);
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const weeks = Math.floor(days / 7);
+  const months = Math.floor(days / 30);
+  const years = Math.floor(days / 365);
 
   if (seconds < 2) {
     return '1 second ago';

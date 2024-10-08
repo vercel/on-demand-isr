@@ -2,14 +2,16 @@ import styles from '../../styles/Home.module.scss';
 import Link from 'next/link';
 import { GitHubIcon, LinkIcon } from '../icons';
 import Explanation from '../explanation';
+import { use } from 'react';
 
 export default function IssueLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
+  const id = use(params).id;
   return (
     <main className={styles.main}>
       <Explanation />
@@ -26,16 +28,16 @@ export default function IssueLayout({
           </a>{' '}
           / <Link href="/">on-demand-isr</Link> /{' '}
           <a
-            href={`https://github.com/vercel/on-demand-isr/issues/${params.id}`}
+            href={`https://github.com/vercel/on-demand-isr/issues/${id}`}
             target="_blank"
             rel="noreferrer"
           >
-            #{params.id}
+            #{id}
           </a>
         </div>
         <div className={styles.issue_comments}>
           <a
-            href={`https://github.com/vercel/on-demand-isr/issues/${params.id}`}
+            href={`https://github.com/vercel/on-demand-isr/issues/${id}`}
             target="_blank"
             rel="noreferrer"
           >
