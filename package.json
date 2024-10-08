@@ -10,9 +10,9 @@
     "jsonwebtoken": "^9.0.2",
     "marked": "^13.0.1",
     "marked-highlight": "^2.1.3",
-    "next": "canary",
-    "react": "19.0.0-rc-f994737d14-20240522",
-    "react-dom": "19.0.0-rc-f994737d14-20240522",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
     "sass": "^1.77.6",
     "server-only": "^0.0.1"
   },
@@ -22,5 +22,6 @@
     "@types/react": "^18.3.3",
     "postcss": "^8.4.38",
     "typescript": "^5.5.2"
-  }
+  },
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
 }

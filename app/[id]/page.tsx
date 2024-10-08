@@ -8,6 +8,13 @@ import { fetchIssuePageData } from '../../lib/github';
 import avatar from '../avatar.png';
 import { Time } from '../time-ago';
 
+export const dynamic = "force-static";
+export const dynamicParams = true;
+
+export function generateStaticParams() {
+  return [];
+}
+
 function markdownToHtml(markdown) {
   if (!markdown) {
     return '';
