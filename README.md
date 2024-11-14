@@ -10,7 +10,7 @@ Demo of On-demand ISR in [Next.js](https://nextjs.org/docs/app/building-your-app
    1. Provide the URL of your deployed application for Homepage URL
    1. Ensure Webhook "Active" is checked
    1. Add `<your-site>/api/webhook` as the Webhook URL
-   1. Create a Webhook secret and add it to `.env.local` as `GITHUB_WEBHOOK_SECRET`
+   1. Create a Webhook secret and add it to your vercel `https://vercel.com/<user>/<project>/settings/environment-variables`  or locally `.env.local` as `GITHUB_WEBHOOK_SECRET`. Dont add this to your public git repo, keep it the env variables secret.
    1. Give "Read Only" access to Issues
    1. Subscribe to "Issues" events
 1. Add the App ID to `.env.local` as `GITHUB_APP_ID`
