@@ -49,7 +49,7 @@ export default async function Page() {
         </div>
       </div>
       <div className={styles.issues}>
-        {issues.map((issue: any) => (
+        {issues && issues.map && issues.map((issue: any) => (
           <Link
             key={issue.number}
             href={`/${issue.number}`}

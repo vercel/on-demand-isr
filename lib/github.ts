@@ -5,11 +5,13 @@ import { notFound } from 'next/navigation';
 let accessToken;
 
 async function getAccessToken(installationId: number, token: string) {
+
   const data = await fetchGitHub(
     `/app/installations/${installationId}/access_tokens`,
     token,
     { method: 'POST' }
   );
+
   return data.token;
 }
 
@@ -20,7 +22,8 @@ function getGitHubJWT() {
     );
   }
 
-  return jwt.sign(
+
+  const myjwt= jwt.sign(
     {
       iat: Math.floor(Date.now() / 1000) - 60,
       iss: process.env.GITHUB_APP_ID,
@@ -31,11 +34,21 @@ function getGitHubJWT() {
       algorithm: 'RS256',
     }
   );
+
+  return myjwt;
 }
 
 async function getInstallation(token: string) {
   const installations = await fetchGitHub('/app/installations', token);
-  return installations.find((i: any) => i.account.login === 'vercel');
+  function check(i:any) {
+    if (i.app_id == process.env.GITHUB_APP_ID) {
+      return true;
+    }
+    else {
+      return false
+    }
+  }
+  return installations.find(check);
 }
 
 function createGitHubRequest(path: string, token: string, opts: any = {}) {
@@ -60,7 +73,10 @@ export async function fetchGitHub(path: string, token: string, opts: any = {}) {
     req = await createGitHubRequest(path, accessToken, opts);
   }
 
-  return req.json();
+  const ret1= req.json();
+
+  return ret1;
+
 }
 
 export async function readAccessToken() {
@@ -75,9 +91,13 @@ export async function readAccessToken() {
 export async function setAccessToken() {
   const jwt = getGitHubJWT();
   const installation = await getInstallation(jwt);
-  accessToken = await getAccessToken(installation.id, jwt);
 
-  return accessToken;
+  if (installation) {
+    accessToken = await getAccessToken(installation.id, jwt);
+    return accessToken;
+  } else {
+    return undefined;
+  }
 }
 
 export async function fetchIssueAndRepoData() {

@@ -6,6 +6,10 @@ Demo of On-demand ISR in [Next.js](https://nextjs.org/docs/app/building-your-app
 
 ## Setup
 
+For vercel deployment, add the environmental variables to your server secret settings,
+`https://vercel.com/<username>/<project>/settings/environment-variables`,
+For local deploy add the variables to `.env.local`, do not check them in.
+
 1. Create a new [GitHub App](https://github.com/settings/apps/new)
    1. Provide the URL of your deployed application for Homepage URL
    1. Ensure Webhook "Active" is checked
@@ -15,8 +19,12 @@ Demo of On-demand ISR in [Next.js](https://nextjs.org/docs/app/building-your-app
    1. Subscribe to "Issues" events
 1. Add the App ID to `.env.local` as `GITHUB_APP_ID`
 1. Generate a private key and add it to `.env.local` as `GITHUB_APP_PK_PEM`
+quote and replace newlines like this :
+```GITHUB_APP_PK_PEM="-----BEGIN RSA PRIVATE KEY-----\nABCEF==\n-----END RSA PRIVATE KEY-----"```
 1. Install the newly created GitHub App for your repo
 1. `https://github.com/settings/apps/<your-app-name>/installations`
+
+
 
 ## Running Locally
 
