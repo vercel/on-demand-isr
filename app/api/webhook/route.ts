@@ -18,11 +18,11 @@ export async function POST(request: Request) {
 
     if (!crypto.timingSafeEqual(trusted, untrusted)) {
       console.log('[Next.js] Invalid signature.', {
-        trusted: trusted.toString('hex'),
-        untrusted: untrusted.toString('hex'),
+	trusted: trusted.toString('hex'),
+	untrusted: untrusted.toString('hex'),
       });
       return new Response('Invalid signature.', {
-        status: 400,
+	status: 400,
       });
     }
 
