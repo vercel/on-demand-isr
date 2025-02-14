@@ -1,6 +1,3 @@
-'use cache';
-
-import { Suspense } from 'react';
 import Image from 'next/image';
 import { Marked } from 'marked';
 import { markedHighlight } from 'marked-highlight';
@@ -44,7 +41,8 @@ export default async function IssuePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const id = (await params).id;
+  // const id = (await params).id;
+  const id = '5';
   const { issue, comments } = await fetchIssuePageData(id);
 
   // Filter out comments that contain "bot" in the title
@@ -72,10 +70,7 @@ export default async function IssuePage({
         </div>
         <div className={styles.comment_div}>
           <div className={styles.comment_timestamp}>
-            <b>{issue.user.login}</b> commented{' '}
-            <Suspense>
-              <Time time={issue.created_at} />
-            </Suspense>
+            <b>{issue.user.login}</b> commented <Time time={issue.created_at} />
           </div>
           <section
             dangerouslySetInnerHTML={{
@@ -106,9 +101,7 @@ export default async function IssuePage({
           <div className={styles.comment_div}>
             <div className={styles.comment_timestamp}>
               <b>{comment.user.login}</b> commented{' '}
-              <Suspense>
-                <Time time={comment.created_at} />
-              </Suspense>
+              <Time time={comment.created_at} />
             </div>
             <section
               dangerouslySetInnerHTML={{

@@ -99,6 +99,8 @@ export async function fetchIssueAndRepoData() {
 }
 
 export async function fetchIssuePageData(id: string) {
+  'use cache';
+
   const [issue, comments, repoDetails] = await Promise.all([
     fetchGitHub(`/repos/vercel/on-demand-isr/issues/${id}`, accessToken),
     fetchGitHub(

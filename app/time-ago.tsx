@@ -1,4 +1,6 @@
-import { connection } from 'next/server';
+'use client';
+
+import { useState, useEffect } from 'react';
 
 function formatDate(date: string) {
   const currentDate = new Date().getTime();
@@ -44,7 +46,19 @@ function formatDate(date: string) {
   }
 }
 
-export async function Time({ time }: { time: string }) {
-  await connection();
-  return <span>{formatDate(time)}</span>;
+export function Time({ time }: { time: string }) {
+  const [formattedDate, setFormattedDate] = useState<string>('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      setFormattedDate(formatDate(time));
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+
+    return () => clearInterval(interval);
+  }, [time]);
+
+  return <span>{formattedDate}</span>;
 }

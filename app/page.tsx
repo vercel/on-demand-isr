@@ -64,11 +64,9 @@ function IssueLink({ issue }: { issue: any }) {
       <div>
         <div className={styles.issue_title}>{issue.title}</div>
         <div className={styles.issue_desc}>
-          <Suspense fallback={null}>
-            {`#${issue.number} opened `}
-            <Time time={issue.created_at} />
-            {` by ${issue.user.login}`}
-          </Suspense>
+          {`#${issue.number} opened `}
+          <Time time={issue.created_at} />
+          {` by ${issue.user.login}`}
         </div>
       </div>
       {issue.comments > 0 && (
