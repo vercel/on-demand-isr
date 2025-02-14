@@ -1,5 +1,3 @@
-'use cache';
-
 import styles from '../styles/Home.module.scss';
 import Link from 'next/link';
 import {
@@ -52,30 +50,32 @@ export default async function Page() {
       </div>
       <div className={styles.issues}>
         {issues.map((issue: any) => (
-          <Link
-            key={issue.number}
-            href={`/${issue.number}`}
-            className={styles.issue}
-          >
-            <IssueIcon />
-            <div>
-              <div className={styles.issue_title}>{issue.title}</div>
-              <div className={styles.issue_desc}>
-                <Suspense fallback={null}>
-                  {`#${issue.number} opened `}
-                  <Time time={issue.created_at} />
-                  {` by ${issue.user.login}`}
-                </Suspense>
-              </div>
-            </div>
-            {issue.comments > 0 && (
-              <div className={styles.comment_count}>
-                <CommentIcon /> {new Number(issue.comments).toLocaleString()}
-              </div>
-            )}
-          </Link>
+          <IssueLink key={issue.number} issue={issue} />
         ))}
       </div>
     </main>
+  );
+}
+
+function IssueLink({ issue }: { issue: any }) {
+  return (
+    <Link href={`/${issue.number}`} className={styles.issue}>
+      <IssueIcon />
+      <div>
+        <div className={styles.issue_title}>{issue.title}</div>
+        <div className={styles.issue_desc}>
+          <Suspense fallback={null}>
+            {`#${issue.number} opened `}
+            <Time time={issue.created_at} />
+            {` by ${issue.user.login}`}
+          </Suspense>
+        </div>
+      </div>
+      {issue.comments > 0 && (
+        <div className={styles.comment_count}>
+          <CommentIcon /> {new Number(issue.comments).toLocaleString()}
+        </div>
+      )}
+    </Link>
   );
 }

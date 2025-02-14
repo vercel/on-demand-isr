@@ -1,7 +1,5 @@
 'use cache';
 
-export const dynamicParams = true;
-
 import { Suspense } from 'react';
 import Image from 'next/image';
 import { Marked } from 'marked';
