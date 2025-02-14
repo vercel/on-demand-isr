@@ -41,8 +41,7 @@ export default async function IssuePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  // const id = (await params).id;
-  const id = '5';
+  const id = (await params).id;
   const { issue, comments } = await fetchIssuePageData(id);
 
   // Filter out comments that contain "bot" in the title

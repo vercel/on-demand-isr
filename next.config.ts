@@ -4,7 +4,6 @@ const nextConfig: NextConfig = {
   experimental: {
     useCache: true,
     inlineCss: true,
-    dynamicIO: true,
     ppr: true,
     newDevOverlay: true,
     reactOwnerStack: true
