@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 202r Vercel
+Copyright (c) 2025 Vercel
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
