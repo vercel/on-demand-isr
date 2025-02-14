@@ -1,7 +1,6 @@
 import 'server-only';
 import jwt from 'jsonwebtoken';
 import { notFound } from 'next/navigation';
-import { unstable_cacheLife } from 'next/cache';
 
 let accessToken;
 
@@ -83,9 +82,6 @@ export async function setAccessToken() {
 
 export async function fetchIssueAndRepoData() {
   'use cache';
-  unstable_cacheLife({
-    revalidate: 5
-  });
 
   const [issues, repoDetails] = await Promise.all([
     fetchGitHub('/repos/vercel/on-demand-isr/issues', accessToken),
@@ -104,9 +100,6 @@ export async function fetchIssueAndRepoData() {
 
 export async function fetchIssuePageData(id: string) {
   'use cache';
-  unstable_cacheLife({
-    revalidate: 5
-  });
 
   const [issue, comments, repoDetails] = await Promise.all([
     fetchGitHub(`/repos/vercel/on-demand-isr/issues/${id}`, accessToken),
