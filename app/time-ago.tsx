@@ -1,6 +1,8 @@
-import { unstable_noStore } from 'next/cache';
+'use client';
 
-function formatDate(date) {
+import { useState, useEffect } from 'react';
+
+function formatDate(date: string) {
   const currentDate = new Date().getTime();
   const targetDate = new Date(date).getTime();
   const timeDifference = currentDate - targetDate;
@@ -44,7 +46,19 @@ function formatDate(date) {
   }
 }
 
-export function Time({ time }) {
-  unstable_noStore();
-  return <span>{formatDate(time)}</span>;
+export function Time({ time }: { time: string }) {
+  const [formattedDate, setFormattedDate] = useState<string>('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      setFormattedDate(formatDate(time));
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+
+    return () => clearInterval(interval);
+  }, [time]);
+
+  return <span>{formattedDate}</span>;
 }

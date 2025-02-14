@@ -102,6 +102,16 @@
   font-size: 12px;
 }
 
+.left {
+  display: flex;
+}
+
+.right {
+  display: flex;
+  gap: 8px;
+  color: #888;
+}
+
 .issues {
   border: 1px solid #30363d;
   width: 100%;
@@ -114,6 +124,8 @@
   padding: 15px 20px;
   border-bottom: 1px solid #21262d;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   &:hover {
     background-color: #151b22;

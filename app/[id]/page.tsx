@@ -1,19 +1,11 @@
-import { Suspense } from "react";
-import Image from "next/image";
-import { Marked } from "marked";
-import { markedHighlight } from "marked-highlight";
-import hljs from "highlight.js";
-import styles from "../../styles/Home.module.scss";
-import { fetchIssuePageData } from "../../lib/github";
-import avatar from "../avatar.png";
-import { Time } from "../time-ago";
-
-export const dynamic = "force-static";
-export const dynamicParams = true;
-
-export function generateStaticParams() {
-  return [];
-}
+import Image from 'next/image';
+import { Marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js';
+import styles from '../../styles/Home.module.scss';
+import { fetchIssuePageData } from '../../lib/github';
+import avatar from '../avatar.png';
+import { Time } from '../time-ago';
 
 interface Comment {
   html_url: string;
@@ -26,18 +18,18 @@ interface Comment {
   body: string;
 }
 
-function markdownToHtml(markdown) {
+function markdownToHtml(markdown: string) {
   if (!markdown) {
-    return "";
+    return '';
   }
 
   const marked = new Marked(
     markedHighlight({
-      langPrefix: "hljs language-",
+      langPrefix: 'hljs language-',
       highlight(code, lang) {
-        const language = hljs.getLanguage(lang) ? lang : "plaintext";
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
         return hljs.highlight(code, { language }).value;
-      },
+      }
     })
   );
 
@@ -45,16 +37,16 @@ function markdownToHtml(markdown) {
 }
 
 export default async function IssuePage({
-  params,
+  params
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const id = (await params).id
+  const id = (await params).id;
   const { issue, comments } = await fetchIssuePageData(id);
 
   // Filter out comments that contain "bot" in the title
   const filteredComments = comments.filter(
-    (comment) => !comment.user.login.toLowerCase().includes("bot")
+    (comment) => !comment.user.login.toLowerCase().includes('bot')
   );
 
   return (
@@ -77,15 +69,12 @@ export default async function IssuePage({
         </div>
         <div className={styles.comment_div}>
           <div className={styles.comment_timestamp}>
-            <b>{issue.user.login}</b> commented{" "}
-            <Suspense>
-              <Time time={issue.created_at} />
-            </Suspense>
+            <b>{issue.user.login}</b> commented <Time time={issue.created_at} />
           </div>
           <section
             dangerouslySetInnerHTML={{
               __html:
-                markdownToHtml(issue.body) || "<i>No description provided.</i>",
+                markdownToHtml(issue.body) || '<i>No description provided.</i>'
             }}
             className={styles.comment_body}
           />
@@ -110,14 +99,12 @@ export default async function IssuePage({
           </div>
           <div className={styles.comment_div}>
             <div className={styles.comment_timestamp}>
-              <b>{comment.user.login}</b> commented{" "}
-              <Suspense>
-                <Time time={comment.created_at} />
-              </Suspense>
+              <b>{comment.user.login}</b> commented{' '}
+              <Time time={comment.created_at} />
             </div>
             <section
               dangerouslySetInnerHTML={{
-                __html: markdownToHtml(comment.body),
+                __html: markdownToHtml(comment.body)
               }}
               className={styles.comment_body}
             />

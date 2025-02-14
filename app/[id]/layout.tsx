@@ -2,16 +2,16 @@ import styles from '../../styles/Home.module.scss';
 import Link from 'next/link';
 import { GitHubIcon, LinkIcon } from '../icons';
 import Explanation from '../explanation';
-import { use } from 'react';
 
-export default function IssueLayout({
+export default async function IssueLayout({
   children,
-  params,
+  params
 }: {
   children: React.ReactNode;
   params: Promise<{ id: string }>;
 }) {
-  const id = use(params).id;
+  const id = (await params).id;
+
   return (
     <main className={styles.main}>
       <Explanation />

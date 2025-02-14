@@ -24,11 +24,11 @@ function getGitHubJWT() {
     {
       iat: Math.floor(Date.now() / 1000) - 60,
       iss: process.env.GITHUB_APP_ID,
-      exp: Math.floor(Date.now() / 1000) + 60 * 10, // 10 minutes is the max
+      exp: Math.floor(Date.now() / 1000) + 60 * 10 // 10 minutes is the max
     },
     process.env.GITHUB_APP_PK_PEM,
     {
-      algorithm: 'RS256',
+      algorithm: 'RS256'
     }
   );
 }
@@ -45,8 +45,8 @@ function createGitHubRequest(path: string, token: string, opts: any = {}) {
       ...opts.headers,
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
-      Accept: 'application/vnd.github.v3+json',
-    },
+      Accept: 'application/vnd.github.v3+json'
+    }
   });
 }
 
@@ -81,9 +81,11 @@ export async function setAccessToken() {
 }
 
 export async function fetchIssueAndRepoData() {
+  'use cache';
+
   const [issues, repoDetails] = await Promise.all([
     fetchGitHub('/repos/vercel/on-demand-isr/issues', accessToken),
-    fetchGitHub('/repos/vercel/on-demand-isr', accessToken),
+    fetchGitHub('/repos/vercel/on-demand-isr', accessToken)
   ]);
 
   console.log('[Next.js] Fetching data for /');
@@ -92,18 +94,20 @@ export async function fetchIssueAndRepoData() {
   return {
     issues,
     stargazers_count: repoDetails.stargazers_count,
-    forks_count: repoDetails.forks_count,
+    forks_count: repoDetails.forks_count
   };
 }
 
 export async function fetchIssuePageData(id: string) {
+  'use cache';
+
   const [issue, comments, repoDetails] = await Promise.all([
     fetchGitHub(`/repos/vercel/on-demand-isr/issues/${id}`, accessToken),
     fetchGitHub(
       `/repos/vercel/on-demand-isr/issues/${id}/comments`,
       accessToken
     ),
-    fetchGitHub('/repos/vercel/on-demand-isr', accessToken),
+    fetchGitHub('/repos/vercel/on-demand-isr', accessToken)
   ]);
 
   console.log(`[Next.js] Fetching data for /${id}`);
@@ -117,6 +121,6 @@ export async function fetchIssuePageData(id: string) {
     issue,
     comments,
     stargazers_count: repoDetails.stargazers_count,
-    forks_count: repoDetails.forks_count,
+    forks_count: repoDetails.forks_count
   };
 }
