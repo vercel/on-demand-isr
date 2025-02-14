@@ -1,3 +1,5 @@
+'use cache';
+
 import styles from '../styles/Home.module.scss';
 import Link from 'next/link';
 import {
@@ -5,7 +7,7 @@ import {
   IssueIcon,
   StarIcon,
   ForkIcon,
-  GitHubIcon,
+  GitHubIcon
 } from './icons';
 import { fetchIssueAndRepoData } from '../lib/github';
 import Explanation from './explanation';
@@ -59,7 +61,7 @@ export default async function Page() {
             <div>
               <div className={styles.issue_title}>{issue.title}</div>
               <div className={styles.issue_desc}>
-                <Suspense>
+                <Suspense fallback={null}>
                   {`#${issue.number} opened `}
                   <Time time={issue.created_at} />
                   {` by ${issue.user.login}`}

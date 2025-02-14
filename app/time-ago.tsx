@@ -1,6 +1,6 @@
-import { unstable_noStore } from 'next/cache';
+import { connection } from 'next/server';
 
-function formatDate(date) {
+function formatDate(date: string) {
   const currentDate = new Date().getTime();
   const targetDate = new Date(date).getTime();
   const timeDifference = currentDate - targetDate;
@@ -44,7 +44,7 @@ function formatDate(date) {
   }
 }
 
-export function Time({ time }) {
-  unstable_noStore();
+export async function Time({ time }: { time: string }) {
+  await connection();
   return <span>{formatDate(time)}</span>;
 }
