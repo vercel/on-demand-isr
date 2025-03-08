@@ -12,48 +12,53 @@ import Explanation from './explanation';
 import { Time } from './time-ago';
 
 export default async function Page() {
-  const { issues, forks_count, stargazers_count } =
-    await fetchIssueAndRepoData();
+  try {
+    const { issues, forks_count, stargazers_count } =
+      await fetchIssueAndRepoData();
 
-  return (
-    <main className={styles.main}>
-      <Explanation />
-      <div className={styles.repo}>
-        <div className={styles.repo_title}>
-          <GitHubIcon />{' '}
-          <a
-            href="https://github.com/vercel/on-demand-isr"
-            target="_blank"
-            rel="noreferrer"
-          >
-            vercel
-          </a>{' '}
-          / <Link href="/">on-demand-isr</Link>
+    return (
+      <main className={styles.main}>
+        <Explanation />
+        <div className={styles.repo}>
+          <div className={styles.repo_title}>
+            <GitHubIcon />{' '}
+            <a
+              href="https://github.com/vercel/on-demand-isr"
+              target="_blank"
+              rel="noreferrer"
+            >
+              vercel
+            </a>{' '}
+            / <Link href="/">on-demand-isr</Link>
+          </div>
+          <div className={styles.forks_stars}>
+            <a
+              href="https://github.com/vercel/on-demand-isr/fork"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ForkIcon /> {new Number(forks_count).toLocaleString()}
+            </a>
+            <a
+              href="https://github.com/vercel/on-demand-isr"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <StarIcon /> {new Number(stargazers_count).toLocaleString()}
+            </a>
+          </div>
         </div>
-        <div className={styles.forks_stars}>
-          <a
-            href="https://github.com/vercel/on-demand-isr/fork"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <ForkIcon /> {new Number(forks_count).toLocaleString()}
-          </a>
-          <a
-            href="https://github.com/vercel/on-demand-isr"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <StarIcon /> {new Number(stargazers_count).toLocaleString()}
-          </a>
+        <div className={styles.issues}>
+          {issues.map((issue: any) => (
+            <IssueLink key={issue.number} issue={issue} />
+          ))}
         </div>
-      </div>
-      <div className={styles.issues}>
-        {issues.map((issue: any) => (
-          <IssueLink key={issue.number} issue={issue} />
-        ))}
-      </div>
-    </main>
-  );
+      </main>
+    );
+  } catch (error) {
+    console.error('Error fetching issue and repository data:', error);
+    return <div>Error loading data. Please try again later.</div>;
+  }
 }
 
 function IssueLink({ issue }: { issue: any }) {

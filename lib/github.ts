@@ -51,16 +51,21 @@ function createGitHubRequest(path: string, token: string, opts: any = {}) {
 }
 
 export async function fetchGitHub(path: string, token: string, opts: any = {}) {
-  let req = await createGitHubRequest(path, token, opts);
+  try {
+    let req = await createGitHubRequest(path, token, opts);
 
-  if (req.status === 401) {
-    // JWT has expired, cache a new token
-    await setAccessToken();
-    // Retry request with new cached access token
-    req = await createGitHubRequest(path, accessToken, opts);
+    if (req.status === 401) {
+      // JWT has expired, cache a new token
+      await setAccessToken();
+      // Retry request with new cached access token
+      req = await createGitHubRequest(path, accessToken, opts);
+    }
+
+    return req.json();
+  } catch (error) {
+    console.error('Error during GitHub API request:', error);
+    throw error;
   }
-
-  return req.json();
 }
 
 export async function readAccessToken() {
