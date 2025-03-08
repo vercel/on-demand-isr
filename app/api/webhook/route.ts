@@ -37,6 +37,7 @@ export async function POST(request: Request) {
       revalidatePath(`/${issueNumber}`);
     }
   } catch (error) {
+    console.error('Webhook error:', error);
     return new Response(`Webhook error: ${error.message}`, {
       status: 400,
     });
