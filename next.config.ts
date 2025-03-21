@@ -5,8 +5,6 @@ const nextConfig: NextConfig = {
     useCache: true,
     inlineCss: true,
     ppr: true,
-    newDevOverlay: true,
-    reactOwnerStack: true
   },
   images: {
     remotePatterns: [
