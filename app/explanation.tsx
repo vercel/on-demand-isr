@@ -3,7 +3,6 @@ import styles from '../styles/Home.module.scss';
 export default function Explanation() {
   return (
     <div className={styles.explanation}>
-      <p>{Date.now()}</p>
       <p>
         This app demonstrates <b>*On-Demand ISR support*</b> in Next.js (
         <a
