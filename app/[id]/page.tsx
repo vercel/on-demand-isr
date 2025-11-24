@@ -20,6 +20,7 @@ interface Comment {
 }
 
 export async function generateStaticParams() {
+  'use cache'
   const { issues } =
       await fetchIssueAndRepoData();
       
@@ -65,6 +66,7 @@ export default async function IssuePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  'use cache'
   const id = (await params).id;
   cacheTag(`issue-${id}`)
   const { issue, comments } =
