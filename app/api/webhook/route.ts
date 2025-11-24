@@ -1,5 +1,5 @@
 import crypto from 'crypto';
-import { revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 
 export async function POST(request: Request) {
   try {
@@ -29,12 +29,12 @@ export async function POST(request: Request) {
     const payload = JSON.parse(text);
     const issueNumber = payload.issue?.number;
 
-    console.log('[Next.js] Revalidating /');
-    revalidatePath('/');
+    console.log('[Next.js] Revalidating index');
+    revalidateTag('index', 'max');
 
     if (issueNumber) {
-      console.log(`[Next.js] Revalidating /${issueNumber}`);
-      revalidatePath(`/${issueNumber}`);
+      console.log(`[Next.js] Revalidating issue-${issueNumber}`);
+      revalidateTag(`issue-${issueNumber}`, 'max');
     }
   } catch (error) {
     return new Response(`Webhook error: ${error.message}`, {
