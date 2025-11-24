@@ -3,9 +3,10 @@ import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
 import styles from "../../styles/Home.module.scss";
-import { fetchIssuePageData } from "../../lib/github";
+import { fetchIssueAndRepoData, fetchIssuePageData } from "../../lib/github";
 import avatar from "../avatar.png";
 import { Time } from "../time-ago";
+import { cacheTag } from "next/cache";
 
 interface Comment {
   html_url: string;
@@ -18,8 +19,19 @@ interface Comment {
   body: string;
 }
 
-export function generateStaticParams() {
-  return [];
+export async function generateStaticParams() {
+  'use cache'
+  const { issues } =
+      await fetchIssueAndRepoData();
+      
+  const params: Array<{id: string}> = []
+  
+  for (const issue of issues) {
+    if (issue && issue.number) {
+      params.push({ id: issue.number + '' })
+    }
+  }
+  return params
 }
 
 function markdownToHtml(
@@ -54,7 +66,9 @@ export default async function IssuePage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  'use cache'
   const id = (await params).id;
+  cacheTag(`issue-${id}`)
   const { issue, comments } =
     await fetchIssuePageData(id);
 

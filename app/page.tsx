@@ -10,8 +10,11 @@ import {
 import { fetchIssueAndRepoData } from '../lib/github';
 import Explanation from './explanation';
 import { Time } from './time-ago';
+import { cacheTag } from 'next/cache';
 
 export default async function Page() {
+  'use cache'
+  cacheTag('index')
   const { issues, forks_count, stargazers_count } =
     await fetchIssueAndRepoData();
 
