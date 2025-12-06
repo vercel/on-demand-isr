@@ -83,6 +83,16 @@ export async function setAccessToken() {
 export async function fetchIssueAndRepoData() {
   'use cache';
 
+  // Return empty data during build if credentials are not available
+  if (!process.env.GITHUB_APP_ID || !process.env.GITHUB_APP_PK_PEM) {
+    console.log('[Next.js] GitHub credentials not available, using placeholder data');
+    return {
+      issues: [],
+      stargazers_count: 0,
+      forks_count: 0
+    };
+  }
+
   const [issues, repoDetails] = await Promise.all([
     fetchGitHub('/repos/vercel/on-demand-isr/issues', accessToken),
     fetchGitHub('/repos/vercel/on-demand-isr', accessToken)
@@ -100,6 +110,12 @@ export async function fetchIssueAndRepoData() {
 
 export async function fetchIssuePageData(id: string) {
   'use cache';
+
+  // Return empty data during build if credentials are not available
+  if (!process.env.GITHUB_APP_ID || !process.env.GITHUB_APP_PK_PEM) {
+    console.log('[Next.js] GitHub credentials not available, using placeholder data');
+    notFound();
+  }
 
   const [issue, comments, repoDetails] = await Promise.all([
     fetchGitHub(`/repos/vercel/on-demand-isr/issues/${id}`, accessToken),
