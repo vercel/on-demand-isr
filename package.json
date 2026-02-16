@@ -10,7 +10,7 @@
     "jsonwebtoken": "^9.0.2",
     "marked": "^15.0.7",
     "marked-highlight": "^2.2.1",
-    "next": "15.3.6",
+    "next": "^15.5.12",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sass": "^1.85.0",
