@@ -35,7 +35,7 @@ function getGitHubJWT() {
 
 async function getInstallation(token: string) {
   const installations = await fetchGitHub('/app/installations', token);
-  return installations.find((i: any) => i.account.login === 'vercel');
+  return installations.find((i: any) => i.account.login === 'nextjs');
 }
 
 function createGitHubRequest(path: string, token: string, opts: any = {}) {
@@ -84,8 +84,8 @@ export async function fetchIssueAndRepoData() {
   'use cache';
 
   const [issues, repoDetails] = await Promise.all([
-    fetchGitHub('/repos/vercel/on-demand-isr/issues', accessToken),
-    fetchGitHub('/repos/vercel/on-demand-isr', accessToken)
+    fetchGitHub('/repos/nextjs/on-demand-isr/issues', accessToken),
+    fetchGitHub('/repos/nextjs/on-demand-isr', accessToken)
   ]);
 
   console.log('[Next.js] Fetching data for /');
@@ -102,12 +102,12 @@ export async function fetchIssuePageData(id: string) {
   'use cache';
 
   const [issue, comments, repoDetails] = await Promise.all([
-    fetchGitHub(`/repos/vercel/on-demand-isr/issues/${id}`, accessToken),
+    fetchGitHub(`/repos/nextjs/on-demand-isr/issues/${id}`, accessToken),
     fetchGitHub(
-      `/repos/vercel/on-demand-isr/issues/${id}/comments`,
+      `/repos/nextjs/on-demand-isr/issues/${id}/comments`,
       accessToken
     ),
-    fetchGitHub('/repos/vercel/on-demand-isr', accessToken)
+    fetchGitHub('/repos/nextjs/on-demand-isr', accessToken)
   ]);
 
   console.log(`[Next.js] Fetching data for /${id}`);
