@@ -20,15 +20,15 @@ export default async function IssueLayout({
         <div className={styles.repo_title}>
           <GitHubIcon />{' '}
           <a
-            href="https://github.com/vercel/on-demand-isr"
+            href="https://github.com/nextjs/on-demand-isr"
             target="_blank"
             rel="noreferrer"
           >
-            vercel
+            nextjs
           </a>{' '}
           / <Link href="/">on-demand-isr</Link> /{' '}
           <a
-            href={`https://github.com/vercel/on-demand-isr/issues/${id}`}
+            href={`https://github.com/nextjs/on-demand-isr/issues/${id}`}
             target="_blank"
             rel="noreferrer"
           >
@@ -37,7 +37,7 @@ export default async function IssueLayout({
         </div>
         <div className={styles.issue_comments}>
           <a
-            href={`https://github.com/vercel/on-demand-isr/issues/${id}`}
+            href={`https://github.com/nextjs/on-demand-isr/issues/${id}`}
             target="_blank"
             rel="noreferrer"
           >
